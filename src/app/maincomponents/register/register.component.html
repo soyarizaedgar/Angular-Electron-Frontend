@@ -1,0 +1,37 @@
+<div id="main_div">
+    <div id="welcome_banner">
+        <h1>¡BIENVENIDO A BIYUYO!</h1>
+        <h3>Una aplicación diseñada especialmente para que empieces a administrar tus finanzas como todo un adulto independiente, obviamente con gustos bien dementes. </h3>
+    </div>
+    <div id="register_signin" class="darkmode_toogle">
+
+        <div id="menu">
+            <li (click)="isRegisterToogle(true)">REGISTRARSE</li>
+            <li (click)="isRegisterToogle(false)">INICIAR SESIÓN</li>
+        </div>
+
+        <div *ngIf="isRegister">
+            <form [formGroup] = "registerForm" class="forms_box">
+                <input type="text" id="username" formControlName = "username" 
+                class="form-control" placeholder="Username">
+                <input type="email" id="email" formControlName = "email" 
+                class="form-control" placeholder="Example@email.com">
+                <input type="password" id="password" formControlName = "password" 
+                class="form-control" placeholder="Password">
+                <button (click)="click_reg()" [disabled]="registerForm.invalid" type="button" class="submit-btn" > REGISTRARSE </button>
+            </form>
+        </div>
+
+        <div *ngIf="!isRegister">
+            <form [formGroup] = "signinForm" class="forms_box">
+                <input type="email" id="email" formControlName = "email" 
+                class="form-control" placeholder="Example@email.com">
+                <input type="password" id="password" formControlName = "password" 
+                class="form-control" placeholder="Password">
+                <!-- <input type="checkbox" id="rememberMe" formControlName = "rememberMe" class="form-control"> 
+                <label for="rememberMe">mantener sesión iniciada</label>  -->
+                <button (click)="click_sign()" [disabled]="signinForm.invalid" type="button" class="submit-btn" routerLink="/home">INICIAR SESIÓN</button>
+            </form>
+        </div>
+    </div>
+</div>
