@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
     },(err) => {if (err.status === 500) {
       console.log(err)
     }});
-    this.signinForm.reset();
+    // this.signinForm.reset();
   }
 
   isRegisterToogle(value: boolean){

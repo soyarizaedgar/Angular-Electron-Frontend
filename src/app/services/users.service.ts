@@ -39,7 +39,7 @@ export class UsersService {
         map((data:any)=>{
         localStorage.setItem('access-token', data.token)
         localStorage.setItem('user_id', data.user_id)
-        // this.router.navigateByUrl('/home')
+        this.router.navigateByUrl('/home')
       }))  
   }
 

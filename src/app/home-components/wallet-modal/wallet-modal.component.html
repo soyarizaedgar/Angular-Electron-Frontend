@@ -1,0 +1,25 @@
+<div id="main_div" >
+
+    <div id="menu">
+        <li>NUEVA BILLETERA</li>
+    </div>
+
+    <div>
+        <form [formGroup] = "walletForm" class="forms_box">
+            <input type="text" id="name" formControlName = "name"  class="form-control" placeholder="Nombre">
+            <input type="number" id="initial_amount" formControlName = "initial_amount" class="form-control" placeholder="$0.00">
+            <div id="billsorinvest">
+                <div class="billsorinvest_inner">
+                    <input type="radio"  formControlName = "type" value="B" class="form-control">
+                    <p>Gastos e ingresos</p>
+                </div>
+                <div class="billsorinvest_inner">
+                    <input type="radio"  formControlName = "type" value="I" class="form-control">
+                    <p>Inversiones</p>
+                </div>
+            </div>
+            <button (click)="click_sub()" type="button" class="submit-btn" [disabled]="walletForm.invalid">GUARDAR</button>
+        </form>
+    </div>
+</div>
+

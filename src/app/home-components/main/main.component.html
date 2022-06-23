@@ -1,0 +1,36 @@
+<div id="main_div">
+    <div id="wallets">
+        <h2>Mis billeteras</h2>
+        <div id="wallets_inner">
+            <div *ngFor = "let wallet of walletsList">
+                <div id="wallet">
+                    <p>{{wallet.name}}</p>
+                    <p *ngIf= "wallet.initial_amount">${{wallet.initial_amount}}</p>
+                    <i class="bi bi-caret-right-fill"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="calendar">
+        <div id="agenda">
+                      
+            <app-agenda id="agenda_inner"></app-agenda>
+                <!-- <div id="agenda_inner">
+                    <h2>{{todaysDate | date:'EEEE MMMM d y'}}</h2>
+                    <div *ngFor = "let activity of activitiesList">
+                        <div id="activity">
+                            <input type="checkbox">
+                            <p>{{activity.description}}</p>
+                            <p>{{activity.date | date:'MMM d'}}</p>
+                        </div>
+                    </div>
+                </div> -->
+        </div>
+        <div id="buttons">
+            <div id="buttons_inner">
+                <button mat-button (click)="openModal('E')">Nuevo Evento</button>
+                <button mat-button (click)="openModal('W')">Nueva Billetera</button>
+            </div>
+        </div>
+    </div>
+</div>

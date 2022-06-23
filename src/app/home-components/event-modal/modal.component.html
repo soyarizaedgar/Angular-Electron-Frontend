@@ -1,0 +1,34 @@
+<div id="main_div" >
+
+    <div id="menu">
+        <li (click)="isPaymentToogle(true)">NUEVO PAGO</li>
+        <li (click)="isPaymentToogle(false)">NUEVA TAREA </li>
+    </div>
+
+    <div *ngIf = "isPayment">
+        <form [formGroup] = "paymentForm" class="forms_box">
+            <input type="text" id="title" formControlName = "title"  class="form-control" placeholder="title">
+            <input type="number" id="amount" formControlName = "amount" class="form-control" placeholder="$0.00">
+            <input type="date" id="date" formControlName = "date" 
+            class="form-control">
+            <input matInput [matAutocomplete]="auto" [formControl]="control" formControlName = "wallet_id" placeholder="Search for a wallet">
+            <mat-autocomplete #auto="matAutocomplete" >
+                <mat-option *ngFor="let wallet of walletsList" [value]="wallet._id">
+                    <span>{{wallet.name}}</span> |
+                    <small>id: {{wallet._id}}</small>
+                </mat-option>
+            </mat-autocomplete>
+            <button (click)="click_sub()" type="button" class="submit-btn" [disabled]="paymentForm.invalid">GUARDAR</button>
+        </form>
+    </div>
+
+    <div *ngIf = "!isPayment">
+        <form [formGroup] = "activityForm" class="forms_box">
+            <input type="text" id="title" formControlName = "title"  class="form-control" placeholder="title">
+            <input type="date" id="date" formControlName = "date" 
+            class="form-control">
+            <button type="button" class="submit-btn" [disabled]="activityForm.invalid">GUARDAR</button>
+        </form>
+    </div>
+</div>
+

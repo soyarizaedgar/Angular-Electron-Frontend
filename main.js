@@ -10,7 +10,7 @@ createWindow = () => {
         width: 800,
         height: 600,
         title: "Angular and Electron",
-        resizable: false,
+        resizable: true,
         webPreferences: {
             nodeIntegration: true
         }

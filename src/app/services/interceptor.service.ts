@@ -17,7 +17,7 @@ export class InterceptorService {
     const authorizedReq =  req.clone({
       setHeaders:{
         'access-token': String(localStorage.getItem('access-token') || ''),
-        'user_id':String(localStorage.getItem('user_id') || ''),
+        'user_id': String(localStorage.getItem('user_id') || ''),
       }
     });
 
