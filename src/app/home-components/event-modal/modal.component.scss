@@ -7,6 +7,22 @@
     justify-content: center;
     align-items: center;
 
+    #editbtns{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button{
+            background-color: #FF3A7E;
+            color: #FFF;
+            border: none;
+            margin: 2rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+    }
+
     #menu{
         display: flex;
         list-style: none;
@@ -29,6 +45,35 @@
             border: 0;
             background-color: #EEEEEE;
             padding: 0.5rem;
+        }
+
+        #freqPayment{
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem;
+            width: 80%;
+            input{
+                width: 10%;
+            }
+            #freqPayment-inner{
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+            #radioOptions{
+                .radiobtns{
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    p{
+                        margin: 0;
+                    }
+                    .largeInput{
+                        width: 50%;
+                    }
+                }
+            }
+            
         }
 
         .submit-btn:disabled, .submit-btn:enabled {

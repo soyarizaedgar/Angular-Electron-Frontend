@@ -12,6 +12,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { CalendarComponent } from './calendar/calendar.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { AgendaComponent } from './agenda/agenda.component';
 
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 
@@ -20,13 +21,15 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction'; 
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-import { AgendaComponent } from './agenda/agenda.component';
+import rrulePlugin from '@fullcalendar/rrule';
+import { PaymentTableComponent } from './payment-table/payment-table.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin,
   timeGridPlugin,
-  listPlugin
+  listPlugin,
+  rrulePlugin
 ]);
 
 @NgModule({
@@ -36,7 +39,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     WalletModalComponent,
     CalendarComponent,
     NavigationComponent,
-    AgendaComponent
+    AgendaComponent,
+    PaymentTableComponent,
+    
   ],
   imports: [
     CommonModule,

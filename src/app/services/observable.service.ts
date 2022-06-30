@@ -5,9 +5,8 @@ import { EventEmitter, Injectable } from '@angular/core';
 })
 export class ObservableService {
 
-  wallets$ = new EventEmitter<any>();
-
-  events$ = new EventEmitter<any>();
+  event$ = new EventEmitter<object>();
+  isEdit$ = new EventEmitter<boolean>();
 
   constructor() { }
 

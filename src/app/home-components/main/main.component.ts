@@ -23,7 +23,7 @@ export class MainComponent implements OnInit {
 
   subscription!: Subscription;
 
-  constructor(private wallets: WalletsService, public modal: MatDialog, private observable: ObservableService) { }
+  constructor(private wallets: WalletsService, public modal: MatDialog) { }
   
   ngOnInit(): void {
     this.getWallets()

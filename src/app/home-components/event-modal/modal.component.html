@@ -1,16 +1,20 @@
 <div id="main_div" >
 
-    <div id="menu">
+    <div id="editbtns">
+        <button (click)="updateValues()" *ngIf = "isEdit">Editar</button>
+        <button (click)="deleteEvent()" *ngIf = "isEdit">Eliminar</button>
+    </div>
+
+    <div id="menu" *ngIf = "!isEdit">
         <li (click)="isPaymentToogle(true)">NUEVO PAGO</li>
         <li (click)="isPaymentToogle(false)">NUEVA TAREA </li>
     </div>
-
-    <div *ngIf = "isPayment">
+    
+    <div *ngIf = "isPayment" [hidden]="isHide">
         <form [formGroup] = "paymentForm" class="forms_box">
             <input type="text" id="title" formControlName = "title"  class="form-control" placeholder="title">
             <input type="number" id="amount" formControlName = "amount" class="form-control" placeholder="$0.00">
-            <input type="date" id="date" formControlName = "date" 
-            class="form-control">
+            <input type="date" id="date" formControlName = "date"  class="form-control">
             <input matInput [matAutocomplete]="auto" [formControl]="control" formControlName = "wallet_id" placeholder="Search for a wallet">
             <mat-autocomplete #auto="matAutocomplete" >
                 <mat-option *ngFor="let wallet of walletsList" [value]="wallet._id">
@@ -18,16 +22,51 @@
                     <small>id: {{wallet._id}}</small>
                 </mat-option>
             </mat-autocomplete>
-            <button (click)="click_sub()" type="button" class="submit-btn" [disabled]="paymentForm.invalid">GUARDAR</button>
+            <div id="freqPayment">
+                <form  [formGroup] = "rruleForm" class="forms_box">
+                    <div id="freqPayment-inner">
+                        <input type="checkbox" id="freq" formControlName = "freq" (click)="displayinfo()" >Pago mensual
+                    </div>
+                    <div id="radioOptions" *ngIf = "isFreq">
+                        <p>Detener</p>
+                        <div class="radiobtns">
+                            <input type="radio" value="never" formControlName = "end" (click)="resetRadioBtns()">
+                            <p>Nunca</p>
+                        </div>
+                        <div class="radiobtns">
+                            <input type="radio" value="on" formControlName = "end" (click)="resetRadioBtns()" >
+                            <p>En</p>
+                            <input type="date" class="largeInput" formControlName = "until" >
+                        </div>
+                        <div class="radiobtns">
+                            <input type="radio" value="after" formControlName = "end" (click)="resetRadioBtns()">
+                            <p>Despues</p>
+                            <input type="number" placeholder="3 ocasiones" class="largeInput" formControlName = "count"> 
+                        </div>
+    
+                    </div>
+                </form> 
+            </div>
+            <button (click)="click_pay()" type="button" class="submit-btn" [disabled]="paymentForm.invalid" >GUARDAR</button>
+            
         </form>
     </div>
 
-    <div *ngIf = "!isPayment">
-        <form [formGroup] = "activityForm" class="forms_box">
+    <div *ngIf = "!isPayment" [hidden]="isHide">
+        <form [formGroup] = "taskForm" class="forms_box">
             <input type="text" id="title" formControlName = "title"  class="form-control" placeholder="title">
             <input type="date" id="date" formControlName = "date" 
             class="form-control">
-            <button type="button" class="submit-btn" [disabled]="activityForm.invalid">GUARDAR</button>
+            <input type="checkbox" formControlName = "allDay" (click)="displayinfo()">
+            <p>Todo el día</p>
+            <div *ngIf = "!isAllDay">
+                <p>Desde</p>
+                <input type="time" formControlName = "start" step="3600">
+                <p>Hasta</p>
+                <input type="time" formControlName = "end" step="3600">
+            </div>
+            <button type="button" class="submit-btn" [disabled]="taskForm.invalid" (click)="click_task()" >GUARDAR</button>
+            
         </form>
     </div>
 </div>

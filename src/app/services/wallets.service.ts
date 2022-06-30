@@ -44,13 +44,30 @@ export class WalletsService {
     }));
   }
 
-  createEvent(move:Object){
-    return this.http.post('http://localhost:3001/event', move)
+  createEvent(event:Object){
+    return this.http.post('http://localhost:3001/event', event)
       .pipe(
         tap(()=>{
           this._refresh$.next();
         }))
   }
+
+  updateEvent(event:Object, eventId:string){
+    return this.http.put('http://localhost:3001/event/' + eventId, event)
+      .pipe(
+        tap(()=>{
+          this._refresh$.next();
+        }))
+  }
+
+  deleteEvent(eventId:string){
+    return this.http.delete('http://localhost:3001/event/' + eventId)
+      .pipe(
+        tap(()=>{
+          this._refresh$.next();
+        }))
+  }
+
 
 
 }
