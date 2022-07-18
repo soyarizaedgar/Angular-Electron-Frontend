@@ -6,7 +6,6 @@ import esLocale from '@fullcalendar/core/locales/es';
 import { Subscription } from 'rxjs';
 import { ObservableService } from 'src/app/services/observable.service';
 import { WalletsService } from 'src/app/services/wallets.service';
-// import { EventEditComponent } from '../event-edit/event-edit.component';
 import { EventModalComponent } from '../event-modal/modal.component';
 
 

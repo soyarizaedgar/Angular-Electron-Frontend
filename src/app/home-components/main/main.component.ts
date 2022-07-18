@@ -19,11 +19,11 @@ export class MainComponent implements OnInit {
   walletsList: any;
   userId:any = localStorage.getItem('user_id');
   todaysDate:Date = new Date();
-  eventsList:any = []
+  month = this.todaysDate.getMonth()
 
   subscription!: Subscription;
 
-  constructor(private wallets: WalletsService, public modal: MatDialog) { }
+  constructor(private wallets: WalletsService, public modal: MatDialog, private observable: ObservableService) { }
   
   ngOnInit(): void {
     this.getWallets()
@@ -39,12 +39,9 @@ export class MainComponent implements OnInit {
     });
   }
 
-  getEvents(){
-    this.wallets.getAllEvents(this.userId).subscribe(response =>{
-      this.eventsList = response;
-    });
+  getWalletId(walletId:string){
+    localStorage.setItem('wallet_id', walletId);
   }
-  
 
   openModal(letter: string){
     switch (letter) {

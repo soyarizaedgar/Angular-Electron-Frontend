@@ -55,7 +55,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   exports:[
     NavigationComponent,
     MainComponent,
-    CalendarComponent
+    CalendarComponent,
+    PaymentTableComponent
   ]
 })
 export class HomeComponentsModule { }

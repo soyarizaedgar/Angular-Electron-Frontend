@@ -10,6 +10,7 @@ import { map, tap } from "rxjs/operators";
 })
 export class WalletsService {
 
+
   constructor(private http: HttpClient, private router: Router) { }
 
   private _refresh$ = new Subject<void>();
@@ -27,8 +28,23 @@ export class WalletsService {
     }));
   }
 
+  getOneWallet(walletId:string){
+    return this.http.get('http://localhost:3001/wallet/' + walletId ).pipe(
+      map((response:any) =>{
+        return response;
+    }));
+  }
+
   createWallet(wallet:Object){
     return this.http.post('http://localhost:3001/wallet', wallet)
+      .pipe(
+        tap(()=>{
+          this._refresh$.next();
+        }))
+  }
+
+  updateWallet(event:Object, walletId:string){
+    return this.http.put('http://localhost:3001/wallet/' + walletId, event)
       .pipe(
         tap(()=>{
           this._refresh$.next();
@@ -42,6 +58,29 @@ export class WalletsService {
       map((response:any) =>{
         return response;
     }));
+  }
+
+  getTotalAmount(walletId:string){
+    return this.http.get('http://localhost:3001/events_t/' + walletId ).pipe(
+      map((response:any) =>{
+        return response;
+    }));
+  }
+
+  getMonthEvents(walletId:string, month:Object){
+    return this.http.post('http://localhost:3001/events_m/' + walletId, month)
+      .pipe(
+        map((response:any) =>{
+          return response;
+      }));
+  }
+
+  getInitialAmount(walletId:string, month:object){
+    return this.http.post('http://localhost:3001/events_i/' + walletId, month)
+      .pipe(
+        map((response:any) =>{
+          return response;
+      }));
   }
 
   createEvent(event:Object){

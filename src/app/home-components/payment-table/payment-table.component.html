@@ -1,1 +1,81 @@
-<p>payment-table works!</p>
+<div id="maindiv">
+    <div id="main-inner">
+        <div id="month">
+            <input type="month" [(ngModel)]="date" (change)="getMonthEvents(); getWallet()" min="{{mindate}}" max="{{maxdate}}" >
+        </div>
+        <div id="initialInfo">
+            <p>Monto Inical</p>
+            <p>{{initialamount | currency}}</p>
+        </div>
+        <div id="header">
+            <div class="columnNum"><p>No.</p></div>
+            <div class="columnInfo">
+                <div ><p>Gasto</p></div>
+                <div ><p>Monto</p></div>
+                <div ><p >Fecha</p></div>
+            </div>
+            <div class="columnNum"><p>No.</p></div>
+            <div class="columnInfo">
+                <div ><p>Ingreso</p></div>
+                <div ><p>Monto</p></div>
+                <div ><p>Fecha</p></div>
+            </div>
+        </div>
+        <div id="table">
+            <div class="columnNum">
+                <div *ngFor = "let n of range">
+                    {{n}}
+                </div>
+            </div>
+            <div class="columnInfo">
+                <div *ngFor = "let expenses of expensesList" class="rowInfo">
+                    <div><p>{{expenses.title}}</p></div>
+                    <div><p>{{expenses.amount | currency}}</p></div>
+                    <div><p>{{expenses.date  | date:'shortDate'}}</p></div>
+                </div>
+            </div>
+            <div class="columnNum">
+                <div *ngFor = "let n of range">
+                    {{n}}
+                </div>
+            </div>
+            <div class="columnInfo">
+                <div *ngFor = "let income of incomesList">
+                    <div class="rowInfo">
+                        <div><p>{{income.title}}</p></div>
+                        <div><p>{{income.amount | currency}}</p></div>
+                        <div><p>{{income.date  | date:'shortDate'}}</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <div id="subtotal">
+                <div class="columnNum"></div>
+                <div class="columnInfo">
+                    <p>Total de gastos</p>
+                    <p>{{totalexpenses |  currency}}</p>
+                    <p></p>
+                </div>
+                <div class="columnNum" ></div>
+                <div class="columnInfo">
+                    <p>Total de ingresos</p>
+                    <p>{{totalincomes |  currency}}</p>
+                    <p></p>
+                </div>
+            </div>
+            <div id="total">
+                <div class="columnNum"></div>
+                <div class="columnInfo">
+                    <p>Total disponible</p>
+                    <p>{{totalavailable | currency}}</p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="buttons">
+        <button>Nuevo pago</button>
+        <button>Nuevo ingreso</button>
+    </div>
+</div>

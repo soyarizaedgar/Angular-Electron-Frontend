@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormControl, FormGroup, Validators} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {startWith, map} from 'rxjs/operators';
 
 import { WalletsService } from 'src/app/services/wallets.service';
 
@@ -16,6 +14,9 @@ export class WalletModalComponent implements OnInit {
   userId:any = localStorage.getItem('user_id');
   walletForm!: FormGroup;
 
+  today = new Date();
+  month = this.today.getMonth()
+
   constructor(private wallets: WalletsService) { }
 
   ngOnInit(): void {
@@ -28,10 +29,14 @@ export class WalletModalComponent implements OnInit {
   }
 
   click_sub(){
+    let amounts = new Array(12).fill(0)
+    amounts[this.month]= this.walletForm.value.initial_amount
+
     const wallet = this.walletForm.value
     const object = {
       ... wallet,
-      user_id: this.userId
+      user_id: this.userId,
+      amounts
     }
 
     this.wallets.createWallet(object).subscribe(response =>{

@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit} from '@angular/core';
 
 import { FormControl, FormGroup, Validators} from '@angular/forms';
-import {Observable, Subscription} from 'rxjs';
 import {startWith, map} from 'rxjs/operators';
+import {Observable, Subject, Subscription} from 'rxjs';
 
 import { ObservableService } from 'src/app/services/observable.service';
 import { WalletsService } from 'src/app/services/wallets.service';
+
 
 export interface Wallet {
   _id: string;
@@ -21,7 +22,7 @@ export interface Wallet {
 export class EventModalComponent implements OnInit, OnDestroy {
 
   walletsList:any = []
-  userId:any = localStorage.getItem('user_id');
+  userId:any = localStorage.getItem('user_id')
   
   paymentForm!: FormGroup;
   taskForm!: FormGroup;
@@ -35,10 +36,9 @@ export class EventModalComponent implements OnInit, OnDestroy {
 
   sub!: Subscription
   clickedEvent:any
-  eventId:any
-
+  eventId:any  
   control = new FormControl('');
-  filteredWallets!: Observable<Wallet[]>;
+  filteredWallets!: Observable<Wallet[]>
 
   constructor(private wallets: WalletsService, private observable: ObservableService){
 
@@ -90,10 +90,10 @@ export class EventModalComponent implements OnInit, OnDestroy {
       response.forEach((element: any) => {
         this.walletsList.push({
           _id : element._id,
-          name: element.name })});
+          name: element.name,
+          })});
     });
   }
-
 
   isPaymentToogle(value: boolean){
     this.isPayment = value
@@ -120,6 +120,41 @@ export class EventModalComponent implements OnInit, OnDestroy {
       'count': null,
     })
   }
+  
+  getTotalAvailable(walletId:string){
+    this.wallets.getTotalAmount(walletId).subscribe(response =>{
+      // let sum = 0
+      // response.forEach((event:any) => {
+      //   sum += event.amount
+      // });
+      this.updateTotalAvailable(response.total_amount, walletId)
+    })
+  }
+
+  updateTotalAvailable(amount:number,walletId:string){
+    this.wallets.getOneWallet(walletId).subscribe((event:any) => {
+      const totalavailable = event.initial_amount + amount
+      this.wallets.updateWallet({total_amount: totalavailable}, walletId ).subscribe(response =>{
+          console.log(response)
+      })
+    }) 
+  }
+
+  updateEvent(object:object, eventId:string){
+    this.wallets.updateEvent(object, eventId).subscribe(response =>{
+      console.log(response);
+    },(err) => {if (err.status === 500) {
+      console.log(err)
+    }});
+  }
+
+  createNewEvent(object:object){
+    this.wallets.createEvent(object).subscribe(response =>{
+      console.log(response);
+    },(err) => {if (err.status === 500) {
+      console.log(err)
+    }});
+  }
 
 
   click_pay(){
@@ -144,25 +179,16 @@ export class EventModalComponent implements OnInit, OnDestroy {
     }
     
     if (this.isEdit == true) {
-
-      this.wallets.updateEvent(object, this.eventId).subscribe(response =>{
-        console.log(response);
-      },(err) => {if (err.status === 500) {
-        console.log(err)
-      }});
-      
+      this.updateEvent(object, this.eventId)
     } else {
-      
-      this.wallets.createEvent(object).subscribe(response =>{
-        console.log(response);
-      },(err) => {if (err.status === 500) {
-        console.log(err)
-      }});
-
+      this.createNewEvent(object)
     }
-        
+
+    this.getTotalAvailable(this.paymentForm.value.wallet_id)
+
     this.paymentForm.reset()
     this.rruleForm.reset()
+    this.isFreq = false
   }
 // **************************************************************************
 
@@ -198,21 +224,9 @@ export class EventModalComponent implements OnInit, OnDestroy {
     }
 
     if (this.isEdit == true) {
-
-      this.wallets.updateEvent(object, this.eventId).subscribe(response =>{
-        console.log(response);
-      },(err) => {if (err.status === 500) {
-        console.log(err)
-      }});
-
+      this.updateEvent(object, this.eventId)
     } else {
-
-      this.wallets.createEvent(object).subscribe(response =>{
-        console.log(response);
-      },(err) => {if (err.status === 500) {
-        console.log(err)
-      }});
-      
+      this.createNewEvent(object)
     }
 
     this.taskForm.reset()
@@ -230,7 +244,6 @@ export class EventModalComponent implements OnInit, OnDestroy {
       }
       this.isHide = true
       this.isEdit = true
-      
       return this.clickedEvent    
     })   
   }
@@ -323,11 +336,15 @@ export class EventModalComponent implements OnInit, OnDestroy {
   // **************************************************************************
 
   deleteEvent(){
+    
     this.wallets.deleteEvent(this.clickedEvent._id).subscribe(response =>{
       console.log(response);
     },(err) => {if (err.status === 500) {
       console.log(err)
     }});
+
+    this.getTotalAvailable(this.clickedEvent.wallet_id)
+
   }
 
 

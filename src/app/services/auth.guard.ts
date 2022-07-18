@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate {
   closeSesion(){
     localStorage.removeItem('access-token');
     localStorage.removeItem('user_id');
+    localStorage.removeItem('wallet_id');
   }
 
   canActivate(

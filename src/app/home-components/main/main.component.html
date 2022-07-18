@@ -5,26 +5,15 @@
             <div *ngFor = "let wallet of walletsList">
                 <div id="wallet">
                     <p>{{wallet.name}}</p>
-                    <p *ngIf= "wallet.initial_amount">${{wallet.initial_amount}}</p>
-                    <i class="bi bi-caret-right-fill"></i>
+                    <p>{{wallet.total_amount | currency}}</p>
+                    <i class="bi bi-caret-right-fill" (click)="getWalletId(wallet._id)" routerLink="wallets"></i>
                 </div>
             </div>
         </div>
     </div>
     <div id="calendar">
-        <div id="agenda">
-                      
+        <div id="agenda">     
             <app-agenda id="agenda_inner"></app-agenda>
-                <!-- <div id="agenda_inner">
-                    <h2>{{todaysDate | date:'EEEE MMMM d y'}}</h2>
-                    <div *ngFor = "let activity of activitiesList">
-                        <div id="activity">
-                            <input type="checkbox">
-                            <p>{{activity.description}}</p>
-                            <p>{{activity.date | date:'MMM d'}}</p>
-                        </div>
-                    </div>
-                </div> -->
         </div>
         <div id="buttons">
             <div id="buttons_inner">
