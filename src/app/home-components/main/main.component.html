@@ -6,7 +6,8 @@
                 <div id="wallet">
                     <p>{{wallet.name}}</p>
                     <p>{{wallet.total_amount | currency}}</p>
-                    <i class="bi bi-caret-right-fill" (click)="getWalletId(wallet._id)" routerLink="wallets"></i>
+                    <i class="bi bi-caret-right-fill" (click)="getWalletId(wallet._id); routerTable(wallet.type)" ></i>
+                    <!-- routerLink="wallets" -->
                 </div>
             </div>
         </div>

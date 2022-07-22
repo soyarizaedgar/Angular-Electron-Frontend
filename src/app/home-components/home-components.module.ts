@@ -23,6 +23,9 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import rrulePlugin from '@fullcalendar/rrule';
 import { PaymentTableComponent } from './payment-table/payment-table.component';
+import { InvesmentTableComponent } from './invesment-table/invesment-table.component';
+
+
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -41,6 +44,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NavigationComponent,
     AgendaComponent,
     PaymentTableComponent,
+    InvesmentTableComponent,
     
   ],
   imports: [
@@ -56,7 +60,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NavigationComponent,
     MainComponent,
     CalendarComponent,
-    PaymentTableComponent
+    PaymentTableComponent,
+    InvesmentTableComponent
   ]
 })
 export class HomeComponentsModule { }

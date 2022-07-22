@@ -33,8 +33,10 @@ export class EventModalComponent implements OnInit, OnDestroy {
   isAllDay = false
   isEdit = false
   isHide = false
+  isInvest =  false
 
   sub!: Subscription
+  sub2!: Subscription
   clickedEvent:any
   eventId:any  
   control = new FormControl('');
@@ -43,6 +45,7 @@ export class EventModalComponent implements OnInit, OnDestroy {
   constructor(private wallets: WalletsService, private observable: ObservableService){
 
     this.getClickedEvent()
+    this.isInvestSub()
     
     this.filteredWallets = this.control.valueChanges.pipe(
       startWith(''),
@@ -60,7 +63,10 @@ export class EventModalComponent implements OnInit, OnDestroy {
       'title': new FormControl(null, [Validators.required, Validators.minLength(2) ,Validators.maxLength(20)]),
       'amount': new FormControl(null,[Validators.required]),
       'date': new FormControl(null, [Validators.required]),
-      'wallet_id': new FormControl(null,[Validators.required])
+      'wallet_id': new FormControl(null,[Validators.required]),
+      'final_amount': new FormControl(null),
+      'final_date': new FormControl(null),
+      'income': new FormControl(false),
     });
 
     this.rruleForm = new FormGroup({
@@ -99,6 +105,12 @@ export class EventModalComponent implements OnInit, OnDestroy {
     this.isPayment = value
   }
 
+  isInvestSub(){
+    this.sub2 = this.observable.isInvest$.subscribe(res =>{
+      this.isInvest = res
+    })
+  }
+
   displayinfo(){
     this.isFreq = !this.rruleForm.value.freq
     this.isAllDay = !this.taskForm.value.allDay
@@ -123,10 +135,6 @@ export class EventModalComponent implements OnInit, OnDestroy {
   
   getTotalAvailable(walletId:string){
     this.wallets.getTotalAmount(walletId).subscribe(response =>{
-      // let sum = 0
-      // response.forEach((event:any) => {
-      //   sum += event.amount
-      // });
       this.updateTotalAvailable(response.total_amount, walletId)
     })
   }
@@ -135,7 +143,7 @@ export class EventModalComponent implements OnInit, OnDestroy {
     this.wallets.getOneWallet(walletId).subscribe((event:any) => {
       const totalavailable = event.initial_amount + amount
       this.wallets.updateWallet({total_amount: totalavailable}, walletId ).subscribe(response =>{
-          console.log(response)
+          // console.log(response)
       })
     }) 
   }
@@ -163,19 +171,32 @@ export class EventModalComponent implements OnInit, OnDestroy {
       this.rruleForm.value.count = 1
     }
 
+    const invesment = {
+      status: this.isInvest,
+      final_date: this.paymentForm.value.final_date,
+      final_amount: this.paymentForm.value.final_amount
+    }
+
     const rrule = {
       freq: 'monthly',
       dtstart: this.paymentForm.value.date,
       count: this.rruleForm.value.count || null,
       until: this.rruleForm.value.until || null
     }
+
+    let amount_ = this.paymentForm.value.amount
+    if (this.paymentForm.value.income == false) {
+      amount_ = this.paymentForm.value.amount * -1
+    }
+        
     const payment = this.paymentForm.value
     const object = {
       ... payment,
       user_id: this.userId,
-      amount: this.paymentForm.value.amount * -1,
+      amount: amount_,
       allDay:true,
-      rrule
+      rrule,
+      invesment
     }
     
     if (this.isEdit == true) {
@@ -251,6 +272,7 @@ export class EventModalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.sub.unsubscribe();
+    this.sub2.unsubscribe();
   }
 
   formatDate(utcdate:Date){
@@ -284,14 +306,29 @@ export class EventModalComponent implements OnInit, OnDestroy {
 
   updateValues(){
     this.isHide = false
-    this.eventId = this.clickedEvent._id
+    this.isInvest =  this.clickedEvent.invesment.status
+    this.eventId = this.clickedEvent.event_id
+    
+    let f_date =  this.clickedEvent.invesment.final_date
+    if (f_date != null) {
+      f_date = this.formatDate(new Date(f_date))
+    }
+    let income_
+    if(this.clickedEvent.amount > 0){
+      income_ = true
+    }else{
+      income_ = false
+    }
 
     if (this.isPayment == true) {
       this.paymentForm.patchValue({
         'title': this.clickedEvent.title,
-        'date':  this.formatDate(this.clickedEvent.date),
-        'amount': this.clickedEvent.amount * -1,
-        'wallet_id': this.clickedEvent.wallet_id
+        'date':  this.formatDate(new Date(this.clickedEvent.date)),
+        'amount': Math.abs(this.clickedEvent.amount),
+        'wallet_id': this.clickedEvent.wallet_id,
+        'final_amount': this.clickedEvent.invesment.final_amount,
+        'final_date':  f_date,
+        'income': income_
       })
       
       let freq = false, end = 'never', until

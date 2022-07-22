@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CalendarComponent } from './home-components/calendar/calendar.component';
+import { InvesmentTableComponent } from './home-components/invesment-table/invesment-table.component';
 
 import { MainComponent } from './home-components/main/main.component';
 
@@ -17,7 +18,8 @@ const routes: Routes = [
     [
       {path: '',canActivate:[AuthGuard], component: MainComponent, pathMatch: 'full'},
       {path: 'calendar',canActivate:[AuthGuard], component:CalendarComponent, pathMatch: 'full'},
-      {path: 'wallets',canActivate:[AuthGuard], component:PaymentTableComponent, pathMatch: 'full'}
+      {path: 'wallets',canActivate:[AuthGuard], component:PaymentTableComponent, pathMatch: 'full'},
+      {path: 'invesments',canActivate:[AuthGuard], component:InvesmentTableComponent, pathMatch: 'full'}
     ]}
 ];
 

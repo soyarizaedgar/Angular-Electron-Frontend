@@ -5,15 +5,20 @@
         <button (click)="deleteEvent()" *ngIf = "isEdit">Eliminar</button>
     </div>
 
-    <div id="menu" *ngIf = "!isEdit">
+    <div class="menu" *ngIf = "!isEdit && !isInvest">
         <li (click)="isPaymentToogle(true)">NUEVO PAGO</li>
         <li (click)="isPaymentToogle(false)">NUEVA TAREA </li>
+    </div>
+
+    <div class="menu" *ngIf = "!isEdit && isInvest">
+        <li>NUEVA INVERSION</li>
     </div>
     
     <div *ngIf = "isPayment" [hidden]="isHide">
         <form [formGroup] = "paymentForm" class="forms_box">
             <input type="text" id="title" formControlName = "title"  class="form-control" placeholder="title">
             <input type="number" id="amount" formControlName = "amount" class="form-control" placeholder="$0.00">
+            <input type="checkbox" id="income" formControlName = "income" class="form-control"> Es un ingreso
             <input type="date" id="date" formControlName = "date"  class="form-control">
             <input matInput [matAutocomplete]="auto" [formControl]="control" formControlName = "wallet_id" placeholder="Search for a wallet">
             <mat-autocomplete #auto="matAutocomplete" >
@@ -22,8 +27,12 @@
                     <small>id: {{wallet._id}}</small>
                 </mat-option>
             </mat-autocomplete>
-            <div id="freqPayment">
-                <form  [formGroup] = "rruleForm" class="forms_box">
+
+            <input *ngIf = "isEdit && isInvest" type="number" id="final_amount" formControlName = "final_amount" class="form-control" placeholder="$0.00">
+            <input *ngIf = "isEdit && isInvest" type="date" id="final_date" formControlName = "final_date"  class="form-control">
+
+            <div id="freqPayment" *ngIf = "!isInvest">
+                <form  [formGroup] = "rruleForm" class="forms_box" >
                     <div id="freqPayment-inner">
                         <input type="checkbox" id="freq" formControlName = "freq" (click)="displayinfo()" >Pago mensual
                     </div>

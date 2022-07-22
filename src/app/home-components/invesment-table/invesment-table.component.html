@@ -1,0 +1,42 @@
+<div id="maindiv">
+    <div id="main-inner">
+        <div id="month">
+            <input type="month" [(ngModel)]="date" (change)="getMonthEvents(); getWallet()" min="{{mindate}}" max="{{maxdate}}" >
+        </div>
+        <div id="header">
+            <div class="columnNum"><p>No.</p></div>
+            <div class="columnInfo">
+                <div ><p>Nombre</p></div>
+                <div ><p>Monto inicial</p></div>
+                <div><p >Fecha inicial</p></div>
+                <div ><p>Monto final</p></div>
+                <div><p >Fecha final</p></div>
+                <div><p>Ganancia</p></div>
+                <div ><p>%</p></div>
+                <div></div>
+            </div>
+        </div>
+        <div id="table">
+            <div class="columnInfo">
+                <div *ngFor = "let event of eventsList; let i = index" class="rowInfo">
+                    <div><p>{{i + 1}}</p></div>
+                    <div><p>{{event.title}}</p></div>
+                    <div><p>{{event.amount | currency}}</p></div>
+                    <div><p>{{event.date | date:'shortDate'}}</p></div>
+                    <div><p>{{event.invesment.final_amount | currency}}</p></div>
+                    <div><p>{{event.invesment.final_date  | date:'shortDate'}}</p></div>
+                    <div><p>{{event.amount + event.invesment.final_amount | currency}}</p></div>
+                    <div>
+                        <p>{{ ((event.amount + event.invesment.final_amount) / event.amount)*-1 | percent:'1.1-2'}}</p>
+                    </div>
+                    <div (click)="openModal(true); getClickedEvent(event)">
+                        <i class="bi bi-info-circle" ></i>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div id="buttons">
+        <button (click)="openModal(false)">Nuevo pago</button>
+    </div>
+</div>
+

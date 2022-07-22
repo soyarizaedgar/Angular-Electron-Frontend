@@ -1,10 +1,15 @@
 <div id="main_div" >
 
-    <div id="menu">
+    <div id="editbtns">
+        <button (click)="updateValues()" *ngIf = "isEdit">Editar</button>
+        <button (click)="deleteAllEvents()" *ngIf = "isEdit">Eliminar</button>
+    </div>
+
+    <div id="menu" *ngIf = "!isEdit">
         <li>NUEVA BILLETERA</li>
     </div>
 
-    <div>
+    <div [hidden]="isHide">
         <form [formGroup] = "walletForm" class="forms_box">
             <input type="text" id="name" formControlName = "name"  class="form-control" placeholder="Nombre">
             <input type="number" id="initial_amount" formControlName = "initial_amount" class="form-control" placeholder="$0.00">
@@ -14,7 +19,7 @@
                     <p>Gastos e ingresos</p>
                 </div>
                 <div class="billsorinvest_inner">
-                    <input type="radio"  formControlName = "type" value="I" class="form-control">
+                    <input type="radio"  formControlName = "type" value="I" class="form-control" >
                     <p>Inversiones</p>
                 </div>
             </div>

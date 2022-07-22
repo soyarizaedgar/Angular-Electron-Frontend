@@ -22,26 +22,18 @@
             </div>
         </div>
         <div id="table">
-            <div class="columnNum">
-                <div *ngFor = "let n of range">
-                    {{n}}
-                </div>
-            </div>
             <div class="columnInfo">
-                <div *ngFor = "let expenses of expensesList" class="rowInfo">
+                <div *ngFor = "let expenses of expensesList; let i = index" class="rowInfo">
+                    <div><p>{{i + 1}}</p></div>
                     <div><p>{{expenses.title}}</p></div>
                     <div><p>{{expenses.amount | currency}}</p></div>
                     <div><p>{{expenses.date  | date:'shortDate'}}</p></div>
                 </div>
             </div>
-            <div class="columnNum">
-                <div *ngFor = "let n of range">
-                    {{n}}
-                </div>
-            </div>
             <div class="columnInfo">
-                <div *ngFor = "let income of incomesList">
+                <div *ngFor = "let income of incomesList; let i = index">
                     <div class="rowInfo">
+                        <div><p>{{i + 1}}</p></div>
                         <div><p>{{income.title}}</p></div>
                         <div><p>{{income.amount | currency}}</p></div>
                         <div><p>{{income.date  | date:'shortDate'}}</p></div>
@@ -75,7 +67,7 @@
         </div>
     </div>
     <div id="buttons">
-        <button>Nuevo pago</button>
-        <button>Nuevo ingreso</button>
+        <button (click)="openModal('E')">Nuevo pago</button>
+        <button (click)="openModal('W')">Editar Billetera</button>
     </div>
 </div>

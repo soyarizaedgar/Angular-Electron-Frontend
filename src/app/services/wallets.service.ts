@@ -51,6 +51,14 @@ export class WalletsService {
         }))
   }
 
+  deleteWallet(walletId:string){
+    return this.http.delete('http://localhost:3001/wallet/' + walletId)
+      .pipe(
+        tap(()=>{
+          this._refresh$.next();
+        }))
+  }
+
   // Events
 
   getAllEvents(userId:string){
@@ -101,6 +109,14 @@ export class WalletsService {
 
   deleteEvent(eventId:string){
     return this.http.delete('http://localhost:3001/event/' + eventId)
+      .pipe(
+        tap(()=>{
+          this._refresh$.next();
+        }))
+  }
+
+  deleteManyEvents(walletId:string){
+    return this.http.delete('http://localhost:3001/events/' + walletId)
       .pipe(
         tap(()=>{
           this._refresh$.next();

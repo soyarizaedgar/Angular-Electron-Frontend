@@ -1,6 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { WalletsService } from 'src/app/services/wallets.service';
+import { EventModalComponent } from '../event-modal/modal.component';
+import {MatDialog} from '@angular/material/dialog';
+import { ObservableService } from 'src/app/services/observable.service';
+import { WalletModalComponent } from '../wallet-modal/wallet-modal.component';
 
 @Component({
   selector: 'app-payment-table',
@@ -14,7 +18,6 @@ export class PaymentTableComponent implements OnInit, OnDestroy  {
   subscription!: Subscription;
   currentwallet:any
 
-  range = [1,2,3,4,5,6,7,8,9,10]
   eventsList:any = []
   todaysDate:Date = new Date();
   walletId:any = localStorage.getItem('wallet_id');
@@ -29,7 +32,7 @@ export class PaymentTableComponent implements OnInit, OnDestroy  {
   maxdate = this.date
   mindate = this.getMinDate(this.todaysDate)
 
-  constructor(private wallets: WalletsService) {
+  constructor(private wallets: WalletsService,public modal: MatDialog, private observable: ObservableService) {
     
   }
 
@@ -69,12 +72,6 @@ export class PaymentTableComponent implements OnInit, OnDestroy  {
     })
   }
 
-  updateAmounts(){
-    this.wallets.updateWallet({name: 'TDC NU'}, this.walletId).subscribe( response =>{
-      console.log(response)
-    })
-  }
-
   getMonthEvents(){
     this.resetTable()
     this.wallets.getMonthEvents(this.walletId, {date: this.date}).subscribe(response =>{
@@ -110,6 +107,18 @@ export class PaymentTableComponent implements OnInit, OnDestroy  {
     const month = '01'
     const date_ = year.concat('-',month)
     return date_
+  }
+
+  openModal(letter: string){
+    switch (letter) {
+      case 'W':
+        this.modal.open(WalletModalComponent);
+        this.observable.wallet$.emit(this.currentwallet)
+        break;
+      case 'E':
+        this.modal.open(EventModalComponent);
+        break;
+    }
   }
   
 }

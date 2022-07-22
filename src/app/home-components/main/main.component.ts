@@ -6,7 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {EventModalComponent} from '../event-modal/modal.component';
 import { WalletModalComponent } from '../wallet-modal/wallet-modal.component';
-import { ObservableService } from 'src/app/services/observable.service';
+// import { ObservableService } from 'src/app/services/observable.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -23,7 +23,7 @@ export class MainComponent implements OnInit {
 
   subscription!: Subscription;
 
-  constructor(private wallets: WalletsService, public modal: MatDialog, private observable: ObservableService) { }
+  constructor(private wallets: WalletsService, public modal: MatDialog, private router: Router) { }
   
   ngOnInit(): void {
     this.getWallets()
@@ -41,6 +41,15 @@ export class MainComponent implements OnInit {
 
   getWalletId(walletId:string){
     localStorage.setItem('wallet_id', walletId);
+  }
+
+  routerTable(walletType:string){
+    if (walletType === 'B') {
+      this.router.navigate(['home/wallets']);
+    } else {
+      this.router.navigate(['home/invesments']);
+
+    }
   }
 
   openModal(letter: string){

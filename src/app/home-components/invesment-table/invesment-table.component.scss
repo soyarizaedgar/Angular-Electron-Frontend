@@ -58,7 +58,7 @@ $border-style: 2px solid gray;
                 border-bottom: $border-style;
             }
             .columnInfo{
-                width: 40%;
+                width: 100%;
                 display: flex;
                 justify-content: space-between;
                 border-bottom: $border-style;
@@ -82,7 +82,7 @@ $border-style: 2px solid gray;
             }
             
             .columnInfo{
-                width: 50%;
+                width: 100%;
                 height: 100%;
                 overflow-y: auto;
                 .rowInfo{

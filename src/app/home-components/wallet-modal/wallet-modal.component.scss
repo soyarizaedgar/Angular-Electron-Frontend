@@ -17,6 +17,22 @@
         }
     }
 
+    #editbtns{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button{
+            background-color: #FF3A7E;
+            color: #FFF;
+            border: none;
+            margin: 2rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+    }
+
     .forms_box{
         display: flex;
         flex-direction: column;
