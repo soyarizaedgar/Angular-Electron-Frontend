@@ -53,5 +53,28 @@ export class UsersService {
     const isExpired = this.helper.isTokenExpired(token);
     return isExpired
   }
+
+  getUser(userId:string){
+    return this.http.get('http://localhost:3001/user/' + userId ).pipe(
+      map((response:any) =>{
+        return response;
+    }));
+  }
+
+  updateUser(userId:string, Object:object){
+    return this.http.put('http://localhost:3001/user/' + userId, Object)
+      .pipe(
+        tap(()=>{
+          this._refresh$.next();
+        }))
+  }
+
+  updatepwd(userId:string, Object:object){
+    return this.http.put('http://localhost:3001/userpwd/' + userId, Object)
+      .pipe(
+        tap(()=>{
+          this._refresh$.next();
+        }))
+  }
   
 }

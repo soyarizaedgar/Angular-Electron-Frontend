@@ -53,7 +53,8 @@ export class AgendaComponent implements OnInit {
     locale: 'es', 
     selectable: true,
     eventClick: this.handleDateClick.bind(this),
-    events: []
+    events: [],
+    themeSystem: 'lumen'
 
   };
 

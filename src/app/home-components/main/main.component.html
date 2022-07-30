@@ -1,25 +1,31 @@
 <div id="main_div">
     <div id="wallets">
-        <h2>Mis billeteras</h2>
         <div id="wallets_inner">
+            <h2>Billeteras</h2>
             <div *ngFor = "let wallet of walletsList">
                 <div id="wallet">
                     <p>{{wallet.name}}</p>
                     <p>{{wallet.total_amount | currency}}</p>
                     <i class="bi bi-caret-right-fill" (click)="getWalletId(wallet._id); routerTable(wallet.type)" ></i>
-                    <!-- routerLink="wallets" -->
                 </div>
             </div>
         </div>
     </div>
     <div id="calendar">
-        <div id="agenda">     
+        <div id="agenda">
+            <h2>Agenda</h2>    
             <app-agenda id="agenda_inner"></app-agenda>
         </div>
         <div id="buttons">
             <div id="buttons_inner">
-                <button mat-button (click)="openModal('E')">Nuevo Evento</button>
-                <button mat-button (click)="openModal('W')">Nueva Billetera</button>
+                <button mat-button (click)="openModal('E')">
+                    <i class="bi bi-plus-circle-fill"></i>
+                    <p>Crear Evento</p>
+                </button>
+                <button mat-button (click)="openModal('W')">
+                    <i class="bi bi-plus-circle-fill"></i>
+                    <p>Crear Billetera</p>
+                </button>
             </div>
         </div>
     </div>

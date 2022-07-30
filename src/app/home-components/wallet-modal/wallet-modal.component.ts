@@ -78,6 +78,9 @@ export class WalletModalComponent implements OnInit, OnDestroy{
       'initial_amount': this.clickedWallet.initial_amount,
       'type': this.clickedWallet.type
     })
+    const type = this.walletForm.get('type')
+    type?.disable()
+    
   }
 
   ngOnDestroy(){

@@ -333,9 +333,12 @@ export class EventModalComponent implements OnInit, OnDestroy {
       
       let freq = false, end = 'never', until
 
-      if (this.clickedEvent.rrule.count > 1 || this.clickedEvent.rrule.until != null) {
-       freq =  true
-       this.displayinfo()
+      if (
+        this.clickedEvent.rrule.count > 1 || 
+        this.clickedEvent.rrule.until != null || 
+        this.clickedEvent.rrule.count == null) {
+        freq =  true
+        this.displayinfo()
       }
       if (this.clickedEvent.rrule.count > 1) {
         end = 'after'
@@ -352,6 +355,8 @@ export class EventModalComponent implements OnInit, OnDestroy {
         'freq': freq,
         'end': end
       })
+
+      this.rruleForm.disable()
     }
     else{
 

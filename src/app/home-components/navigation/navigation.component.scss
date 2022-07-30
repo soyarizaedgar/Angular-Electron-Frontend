@@ -1,0 +1,16 @@
+#main{
+    background-color: #2155BF;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    #buttons{
+        color: #FFF;
+        
+        i{
+            cursor: pointer;
+            margin: 0 2rem;
+            font-size: 3em;
+        }
+    }
+}

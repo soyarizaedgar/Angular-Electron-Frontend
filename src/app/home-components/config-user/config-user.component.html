@@ -1,0 +1,24 @@
+<div id="main" >
+    <form [formGroup] = "userForm" class="forms_box" >
+        <input type="text" id="username" formControlName = "username" placeholder="username">
+        <input type="email" id="email" formControlName = "email" class="form-control" 
+        placeholder="Example@email.com">
+        <input *ngIf="isEdit" type="password" id="password" formControlName = "password" 
+        class="form-control" placeholder="Password">
+        <button  (click)="enableForm('E')" *ngIf="!isEdit && !editPwd" type="button" class="submit-btn">EDITAR</button>
+        <button  (click)="enableForm('D')" *ngIf="isEdit" type="button" class="submit-btn">CANCELAR</button>
+        <button  (click)="updateUser()" *ngIf="isEdit" type="button" class="submit-btn" [disabled]="userForm.invalid" >GUARDAR</button>
+        <button  (click)="enableForm('P')" *ngIf="!isEdit && !editPwd" type="button" class="submit-btn">CAMBIAR CONTRASEÑA</button>
+    </form>
+    
+    <form [formGroup] = "passwordForm" class="forms_box" *ngIf="editPwd" >
+        <input type="password" id="oldpwd" formControlName = "oldpwd" 
+        class="form-control" placeholder="Password">
+        <input type="password" id="newpwd" formControlName = "newpwd" 
+        class="form-control" placeholder="New password">
+        <input type="password" id="repeatpwd" formControlName = "repeatpwd" 
+        class="form-control" placeholder="Repeat new Password">
+        <button  (click)="enableForm('P')" type="button" class="submit-btn">CANCELAR</button>
+        <button  (click)="changePassword()" type="button" class="submit-btn" [disabled]="passwordForm.invalid" >GUARDAR</button>
+    </form>
+</div>

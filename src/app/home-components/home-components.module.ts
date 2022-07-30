@@ -24,6 +24,7 @@ import listPlugin from '@fullcalendar/list';
 import rrulePlugin from '@fullcalendar/rrule';
 import { PaymentTableComponent } from './payment-table/payment-table.component';
 import { InvesmentTableComponent } from './invesment-table/invesment-table.component';
+import { ConfigUserComponent } from './config-user/config-user.component';
 
 
 
@@ -45,6 +46,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AgendaComponent,
     PaymentTableComponent,
     InvesmentTableComponent,
+    ConfigUserComponent,
     
   ],
   imports: [
@@ -61,7 +63,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MainComponent,
     CalendarComponent,
     PaymentTableComponent,
-    InvesmentTableComponent
+    InvesmentTableComponent,
+    ConfigUserComponent
   ]
 })
 export class HomeComponentsModule { }
