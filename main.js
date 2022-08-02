@@ -7,20 +7,20 @@ const store = new Store();
 //This function creates the window and its properties.
 createWindow = () => {
     appWin = new BrowserWindow({
-        width: 800,
-        height: 600,
-        title: "Angular and Electron",
-        resizable: true,
+        width: 800, 
+        height: 600, 
+        title: "BIYUYO",
+        resizable: false,
         webPreferences: {
             nodeIntegration: true
         }
     });
-    
+    appWin.maximize();
     appWin.loadURL(`file://${__dirname}/dist/index.html`);
 
     appWin.setMenu(null);
 
-    appWin.webContents.openDevTools();
+    // appWin.webContents.openDevTools();
 
     appWin.on("closed", () => {
         appWin = null;

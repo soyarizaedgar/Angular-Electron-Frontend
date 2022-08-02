@@ -1,35 +1,114 @@
 #main{
     height: 90%;
     width: 100%;
-    .forms_box{
+    background-color: #2155BF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    #whitespace{
+        height: 90%;
+        width: 80%;
+        background-color: #FFF;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    
-        input{
-            margin: 1rem;
-            width: 50%;
-            border: 0;
-            background-color: #EEEEEE;
-            padding: 0.5rem;
+        border-radius: 30px;
+
+        #nav{
+            background-color: #1C1C1C;
+            height: 100%;
+            width: 25%;
+            border-radius: 30px 0 0 30px;
+            display: flex;
+            flex-direction: column;
+            color: #FFF;
+            font-size: 1.2em;
+
+            :first-child{
+                margin-top: 3rem;
+            }
+
+            .option-nav{
+                width:auto;
+                display: flex;
+                align-items: center;
+                padding: 0.5rem 0;
+                cursor: pointer;
+                
+                p{
+                    margin: 0 1rem;
+                }
+                .color-bar{
+                    width: 10%;
+                    background-color: #F26BAA;
+                }
+            }
+
+            .option-nav:hover{
+                opacity: 50%;
+                border-left: 5px solid #F26BAA;
+            }
+
+            .active{
+                border-left: 5px solid #F26BAA;
+                color: #F26BAA;
+            }
         }
-    
-        
-        .submit-btn:disabled, .submit-btn:enabled {
-            background: #FF3A7E;
-            border: none;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            margin: 1rem 0 0 0;
-            width: 10rem;              
-            cursor: pointer;
+
+        #body{
+            height: 100%;
+            width: 75%;
+
+            .option-body{
+                width: 100%;
+                height: auto;
+                
+                h1{
+                    font-size: 3em;
+                    font-weight: 400;
+                    margin: 2rem;
+                }
+
+                .forms_box{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                
+                    input{
+                        margin: 1rem;
+                        width: 60%;
+                        border: 0;
+                        background-color: #EEEEEE;
+                        padding: 0.5rem;
+                    }
+
+                    .form-control.ng-touched.ng-invalid {
+                        border: 2px solid #fc1d1d;
+                    }
+                    .form-control.ng-touched.ng-valid {
+                        border: 2px solid rgb(30, 201, 30);
+                    }
+                
+                    
+                    .submit-btn:disabled, .submit-btn:enabled {
+                        background: #FF3A7E;
+                        border: none;
+                        color: white;
+                        padding: 0.5rem 1rem;
+                        border-radius: 5px;
+                        margin: 1rem;
+                        width: 10rem;              
+                        cursor: pointer;
+                    }
+                
+                    .submit-btn:disabled{
+                        opacity: 0.5;
+                    }
+                    
+                }
+            }
+
         }
-    
-        .submit-btn:disabled{
-            opacity: 0.5;
-        }
-        
     }
+
 }

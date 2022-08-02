@@ -6,8 +6,8 @@
     <div id="register_signin" class="darkmode_toogle">
 
         <div id="menu">
-            <li (click)="isRegisterToogle(true)">REGISTRARSE</li>
-            <li (click)="isRegisterToogle(false)">INICIAR SESIÓN</li>
+            <li (click)="isRegisterToogle(true)" [ngClass]="{'active': isRegister}">REGISTRARSE</li>
+            <li (click)="isRegisterToogle(false)" [ngClass]="{'active': !isRegister}">INICIAR SESIÓN</li>
         </div>
 
         <div *ngIf="isRegister">

@@ -9,9 +9,14 @@ import { ObservableService } from 'src/app/services/observable.service';
 })
 export class NavigationComponent implements OnInit {
 
+  option = 1
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  returnOption(num:number){
+    this.option = num
   }
 
 }

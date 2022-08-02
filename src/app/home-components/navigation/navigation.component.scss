@@ -4,13 +4,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    #buttons{
+    .buttons{
         color: #FFF;
-        
+        cursor: pointer;
+        &:hover{
+            transform: translateY(-10px);
+        }
         i{
-            cursor: pointer;
             margin: 0 2rem;
             font-size: 3em;
+        }
+    }
+
+    .active{
+        i{
+            border-bottom: 5px solid #F26BAA ;
         }
     }
 }

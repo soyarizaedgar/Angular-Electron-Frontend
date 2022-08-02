@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable } from 'rxjs';
 
 import { UsersService } from "./users.service";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,16 @@ import { UsersService } from "./users.service";
 
 export class AuthGuard implements CanActivate {
 
-  constructor(private users:UsersService, public router: Router){}
+  constructor(private users:UsersService, public router: Router, private snackBar: MatSnackBar){}
 
   closeSesion(){
     localStorage.removeItem('access-token');
     localStorage.removeItem('user_id');
     localStorage.removeItem('wallet_id');
+  }
+
+  openSnack(message:string){
+    this.snackBar.open(message);
   }
 
   canActivate(

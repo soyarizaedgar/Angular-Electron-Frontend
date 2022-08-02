@@ -44,7 +44,7 @@ export class CalendarComponent implements OnInit {
       end: 'today dayGridMonth,timeGridWeek,timeGridDay'
     },
     editable: true,
-    eventColor: '#378006',
+    eventColor: '#F26BAA',
     events: [],
     locales: [ esLocale],
     locale: 'es',// the initial locale. of not specified, uses the first one

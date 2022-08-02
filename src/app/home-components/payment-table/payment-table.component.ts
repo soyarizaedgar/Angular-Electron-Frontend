@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { WalletsService } from 'src/app/services/wallets.service';
 import { EventModalComponent } from '../event-modal/modal.component';
 import {MatDialog} from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { ObservableService } from 'src/app/services/observable.service';
 import { WalletModalComponent } from '../wallet-modal/wallet-modal.component';
 
@@ -32,8 +33,24 @@ export class PaymentTableComponent implements OnInit, OnDestroy  {
   maxdate = this.date
   mindate = this.getMinDate(this.todaysDate)
 
+  ishide = true
+  url:string = ''
   constructor(private wallets: WalletsService,public modal: MatDialog, private observable: ObservableService) {
     
+  }
+  
+  hideNav(){
+    this.ishide = !this.ishide
+    return this.ishide
+  }
+
+  checkStatus(initial:number, final:number){
+    if (initial > final) {
+      this.url = '../../../assets/stonks-meme.jpg'
+    }
+    else{
+      this.url = '../../../assets/malcom-meme.png'
+    }
   }
 
   ngOnDestroy(): void {
@@ -64,6 +81,7 @@ export class PaymentTableComponent implements OnInit, OnDestroy  {
     
     this.wallets.getOneWallet(this.walletId).subscribe(response =>{
       this.currentwallet = response
+      this.checkStatus(this.currentwallet.initial_amount, this.totalamount)
       let date_ = this.formatDate(new Date(this.date))
       this.wallets.getInitialAmount(this.walletId, {date: date_}).subscribe(response =>{
         this.initialamount = this.currentwallet.initial_amount + response.total_amount

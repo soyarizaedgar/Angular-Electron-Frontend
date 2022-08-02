@@ -1,24 +1,72 @@
 <div id="main" >
-    <form [formGroup] = "userForm" class="forms_box" >
-        <input type="text" id="username" formControlName = "username" placeholder="username">
-        <input type="email" id="email" formControlName = "email" class="form-control" 
-        placeholder="Example@email.com">
-        <input *ngIf="isEdit" type="password" id="password" formControlName = "password" 
-        class="form-control" placeholder="Password">
-        <button  (click)="enableForm('E')" *ngIf="!isEdit && !editPwd" type="button" class="submit-btn">EDITAR</button>
-        <button  (click)="enableForm('D')" *ngIf="isEdit" type="button" class="submit-btn">CANCELAR</button>
-        <button  (click)="updateUser()" *ngIf="isEdit" type="button" class="submit-btn" [disabled]="userForm.invalid" >GUARDAR</button>
-        <button  (click)="enableForm('P')" *ngIf="!isEdit && !editPwd" type="button" class="submit-btn">CAMBIAR CONTRASEÑA</button>
-    </form>
-    
-    <form [formGroup] = "passwordForm" class="forms_box" *ngIf="editPwd" >
-        <input type="password" id="oldpwd" formControlName = "oldpwd" 
-        class="form-control" placeholder="Password">
-        <input type="password" id="newpwd" formControlName = "newpwd" 
-        class="form-control" placeholder="New password">
-        <input type="password" id="repeatpwd" formControlName = "repeatpwd" 
-        class="form-control" placeholder="Repeat new Password">
-        <button  (click)="enableForm('P')" type="button" class="submit-btn">CANCELAR</button>
-        <button  (click)="changePassword()" type="button" class="submit-btn" [disabled]="passwordForm.invalid" >GUARDAR</button>
-    </form>
+    <div id="whitespace">
+        <div id="nav">
+            <div class="option-nav" (click)="enableForm(1)" [ngClass]="{'active': option == 1}">
+                <div class="color-bar"></div>
+                <i class="bi bi-eye-fill"></i>
+                <p>Vista general</p>
+            </div>
+            <div class="option-nav" (click)="enableForm(2)" [ngClass]="{'active': option == 2}">
+                <div class="color-bar"></div>
+                <i class="bi bi-pencil-fill"></i>
+                <p>Editar perfil</p>
+            </div>
+            <div class="option-nav" (click)="enableForm(3)" [ngClass]="{'active': option == 3}">
+                <div class="color-bar"></div>
+                <i class="bi bi-key-fill"></i>
+                <p>Cambiar contraseña</p>
+            </div>
+            <div class="option-nav" (click)="closeSesion()"  routerLink="/signin" 
+            [ngClass]="{'active': option == 4}">
+                <div class="color-bar"></div>
+                <i class="bi bi-box-arrow-right"></i>
+                <p>Cerrar sesión</p>
+            </div>
+        </div>
+        <div id="body">
+            <div id="generalview" class="option-body" [hidden]="option != 1">
+                <h1>Vista general de la cuenta</h1>
+                <form [formGroup] = "userForm" class="forms_box" >
+                    <input type="text"  formControlName = "username" placeholder="username">
+                    <input type="email"  formControlName = "email" class="form-control" 
+                    placeholder="Example@email.com">
+                    <div class="btns">
+                        <button  (click)="enableForm(2)" type="button" class="submit-btn">EDITAR</button>
+                    </div>        
+                </form>
+            </div>
+            <div id="editprofile" class="option-body"  [hidden]="option != 2">
+                <h1>Editar Perfil</h1>
+                <form [formGroup] = "userForm" class="forms_box" >
+                    <input type="text" id="username" formControlName = "username" placeholder="username" class="form-control" >
+                    <input type="email" id="email" formControlName = "email" class="form-control" 
+                    placeholder="Example@email.com">
+                    <input *ngIf="isEdit" type="password" id="password" formControlName = "password" 
+                    class="form-control" placeholder="Contraseña">
+                    <div class="btns">
+                        <button  (click)="enableForm(1)" *ngIf="isEdit" type="button" class="submit-btn">CANCELAR</button>
+                        <button  (click)="updateUser()" *ngIf="isEdit" type="button" class="submit-btn" [disabled]="userForm.invalid" >GUARDAR</button>
+                    </div>
+                </form>
+            </div>
+            <div id="changepwd" class="option-body" [hidden]="option != 3">
+                <h1>Cambiar contraseña</h1>
+                <form [formGroup] = "passwordForm" class="forms_box" >
+                    <input type="password" id="oldpwd" formControlName = "oldpwd" 
+                    class="form-control" placeholder="Contraseña actual">
+                    <input type="password" id="newpwd" formControlName = "newpwd" 
+                    class="form-control" placeholder="Nueva contraseña">
+                    <input type="password" id="repeatpwd" formControlName = "repeatpwd" 
+                    class="form-control" placeholder="Confirma tu nueva contraseña">
+                    <div class="btns">
+                        <button  (click)="enableForm(1)" type="button" class="submit-btn">CANCELAR</button>
+                        <button  (click)="changePassword()" type="button" class="submit-btn" [disabled]="passwordForm.invalid" >GUARDAR</button>
+                    </div>
+                </form>
+            </div>
+            <div id="settings" class="option-body" [hidden]="option != 4">
+                <h1>Ajustes</h1>
+            </div>
+        </div>
+    </div>
 </div>

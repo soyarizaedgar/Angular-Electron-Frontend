@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -15,10 +16,10 @@ export class ConfigUserComponent implements OnInit {
   userId:any = localStorage.getItem('user_id');
   currentuser:any
   isEdit = false
-  editPwd = false
   subscription!: Subscription;
+  option = 1
 
-  constructor(private users:UsersService) { }
+  constructor(private users:UsersService, public router: Router) { }
 
   ngOnInit(): void {
 
@@ -48,7 +49,7 @@ export class ConfigUserComponent implements OnInit {
     this.users.updateUser(this.userId, object).subscribe(res =>{
       console.log(res)
     })
-    this.enableForm('D')
+    this.enableForm(2)
   }
 
   changePassword(){
@@ -60,7 +61,7 @@ export class ConfigUserComponent implements OnInit {
       this.users.updatepwd(this.userId, object).subscribe(res =>{
         console.log(res)
       })
-      this.enableForm('P')
+      // this.enableForm('P')
     }else{
       window.alert("passwords don't match");
     }
@@ -77,13 +78,10 @@ export class ConfigUserComponent implements OnInit {
     })
   }
   
-  enableForm(letter:string){
-    if (letter == 'E') {
-      this.userForm.enable()
-      this.isEdit = true
-    } 
-    
-    if(letter == 'D') {
+  enableForm(letter:number){
+
+    if(letter == 1) {
+      this.option = 1
       this.userForm.disable()
       this.isEdit = false
       this.userForm.patchValue({
@@ -91,9 +89,24 @@ export class ConfigUserComponent implements OnInit {
       })
     }
 
-    if(letter == 'P') {
-      this.editPwd = !this.editPwd
+    if (letter == 2) {
+      this.option = 2
+      this.userForm.enable()
+      this.isEdit = true
+    } 
+    
+    if(letter == 3) {
+      this.option = 3
     }
+    if(letter == 4) {
+      this.option = 4
+    }
+  }
+
+  closeSesion(){
+    localStorage.removeItem('access-token');
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('wallet_id');
   }
 
 }

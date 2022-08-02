@@ -12,7 +12,10 @@
         list-style: none;
         cursor: pointer;
         justify-content: center;
+        color: #FF3A7E;
+        font-weight: 500;
         li{
+            border-bottom: 2px solid #FF3A7E ;
             margin: 0.5rem 2rem;
         }
     }
@@ -45,6 +48,13 @@
             border: 0;
             background-color: #EEEEEE;
             padding: 0.5rem;
+        }
+
+        .form-control.ng-touched.ng-invalid {
+            border: 2px solid #fc1d1d;
+        }
+        .form-control.ng-touched.ng-valid {
+            border: 2px solid rgb(30, 201, 30);
         }
 
         #billsorinvest{

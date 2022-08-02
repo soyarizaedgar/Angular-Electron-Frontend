@@ -61,10 +61,8 @@ export class RegisterComponent implements OnInit {
 
   redirect(){
     if(this.users.isLogged()){
-      console.log("home")
       this.router.navigateByUrl('/home');
     }else{
-      console.log("signin")
       this.router.navigateByUrl('/signin')
     }
   }

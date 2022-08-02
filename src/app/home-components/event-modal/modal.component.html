@@ -1,13 +1,13 @@
 <div id="main_div" >
 
     <div id="editbtns">
-        <button (click)="updateValues()" *ngIf = "isEdit">Editar</button>
+        <button (click)="updateValues()" *ngIf = "isEdit" >Editar</button>
         <button (click)="deleteEvent()" *ngIf = "isEdit">Eliminar</button>
     </div>
 
     <div class="menu" *ngIf = "!isEdit && !isInvest">
-        <li (click)="isPaymentToogle(true)">NUEVO PAGO</li>
-        <li (click)="isPaymentToogle(false)">NUEVA TAREA </li>
+        <li (click)="isPaymentToogle(true)" [ngClass]="{'active': isPayment}">NUEVO PAGO</li>
+        <li (click)="isPaymentToogle(false)" [ngClass]="{'active': !isPayment}">NUEVA TAREA </li>
     </div>
 
     <div class="menu" *ngIf = "!isEdit && isInvest">
@@ -16,12 +16,12 @@
     
     <div *ngIf = "isPayment" [hidden]="isHide">
         <form [formGroup] = "paymentForm" class="forms_box">
-            <input type="text" id="title" formControlName = "title"  class="form-control" placeholder="title">
+            <input type="text" id="title" formControlName = "title"  class="form-control" placeholder="Titulo">
             <input type="number" id="amount" formControlName = "amount" class="form-control" placeholder="$0.00">
             <input type="checkbox" id="income" formControlName = "income" class="form-control"> Es un ingreso
             <input type="date" id="date" formControlName = "date"  class="form-control">
-            <input matInput [matAutocomplete]="auto" [formControl]="control" formControlName = "wallet_id" placeholder="Search for a wallet">
-            <mat-autocomplete #auto="matAutocomplete" >
+            <input matInput [matAutocomplete]="auto" [formControl]="control" formControlName = "wallet_id" placeholder="Selecciona una billetera">
+            <mat-autocomplete #auto="matAutocomplete">
                 <mat-option *ngFor="let wallet of walletsList" [value]="wallet._id">
                     <span>{{wallet.name}}</span> |
                     <small>id: {{wallet._id}}</small>
@@ -63,7 +63,7 @@
 
     <div *ngIf = "!isPayment" [hidden]="isHide">
         <form [formGroup] = "taskForm" class="forms_box">
-            <input type="text" id="title" formControlName = "title"  class="form-control" placeholder="title">
+            <input type="text" id="title" formControlName = "title"  class="form-control" placeholder="Titulo">
             <input type="date" id="date" formControlName = "date" 
             class="form-control">
             <input type="checkbox" formControlName = "allDay" (click)="displayinfo()">

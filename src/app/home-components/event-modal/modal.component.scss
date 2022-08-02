@@ -31,6 +31,11 @@
         li{
             margin: 0.5rem 2rem;
         }
+        .active{
+            color: #FF3A7E;
+            font-weight: 500;
+            border-bottom: 2px solid #FF3A7E ;
+        }
     }
 
     .forms_box{
@@ -45,6 +50,13 @@
             border: 0;
             background-color: #EEEEEE;
             padding: 0.5rem;
+        }
+
+        .form-control.ng-touched.ng-invalid {
+            border: 2px solid #fc1d1d;
+        }
+        .form-control.ng-touched.ng-valid {
+            border: 2px solid rgb(30, 201, 30);
         }
 
         #freqPayment{

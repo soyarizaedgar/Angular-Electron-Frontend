@@ -6,7 +6,7 @@
 
     #welcome_banner{
         width: 40%;
-        background-color: #FF3A7E;
+        background-color: #2155BF;
         color: #FFF;
         padding: 2rem;
 
@@ -16,6 +16,9 @@
         align-items: center;
         flex-direction: column;
         text-align: center;
+        h1,h3{
+            font-size: 1.5em;
+        }
     }
 
     #register_signin{
@@ -32,6 +35,12 @@
             justify-content: center;
             li{
                 margin: 0.5rem 2rem;
+            }
+
+            .active{
+                color: #2155BF;
+                font-weight: 500;
+                border-bottom: 2px solid #2155BF ;
             }
         }
 
@@ -63,6 +72,13 @@
     
             .submit-btn:disabled{
                 opacity: 0.5;
+            }
+
+            .form-control.ng-touched.ng-invalid {
+                border: 2px solid #fc1d1d;
+            }
+            .form-control.ng-touched.ng-valid {
+                border: 2px solid rgb(30, 201, 30);
             }
             
         }

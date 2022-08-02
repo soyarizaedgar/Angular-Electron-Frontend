@@ -24,7 +24,15 @@ export class InvesmentTableComponent implements OnInit, OnDestroy {
   maxdate = this.date
   mindate = this.getMinDate(this.todaysDate)
 
+  ishide = true
+  url:string = ''
+
   constructor(private wallets: WalletsService, public modal: MatDialog, private observable: ObservableService) { }
+
+  hideNav(){
+    this.ishide = !this.ishide
+    return this.ishide
+  }
   
   ngOnDestroy(): void {
     this.subscription.unsubscribe()

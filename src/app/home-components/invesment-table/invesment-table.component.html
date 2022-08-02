@@ -1,42 +1,90 @@
 <div id="maindiv">
-    <div id="main-inner">
-        <div id="month">
-            <input type="month" [(ngModel)]="date" (change)="getMonthEvents(); getWallet()" min="{{mindate}}" max="{{maxdate}}" >
-        </div>
-        <div id="header">
-            <div class="columnNum"><p>No.</p></div>
-            <div class="columnInfo">
-                <div ><p>Nombre</p></div>
-                <div ><p>Monto inicial</p></div>
-                <div><p >Fecha inicial</p></div>
-                <div ><p>Monto final</p></div>
-                <div><p >Fecha final</p></div>
-                <div><p>Ganancia</p></div>
-                <div ><p>%</p></div>
-                <div></div>
-            </div>
-        </div>
-        <div id="table">
-            <div class="columnInfo">
-                <div *ngFor = "let event of eventsList; let i = index" class="rowInfo">
-                    <div><p>{{i + 1}}</p></div>
-                    <div><p>{{event.title}}</p></div>
-                    <div><p>{{event.amount | currency}}</p></div>
-                    <div><p>{{event.date | date:'shortDate'}}</p></div>
-                    <div><p>{{event.invesment.final_amount | currency}}</p></div>
-                    <div><p>{{event.invesment.final_date  | date:'shortDate'}}</p></div>
-                    <div><p>{{event.amount + event.invesment.final_amount | currency}}</p></div>
-                    <div>
-                        <p>{{ ((event.amount + event.invesment.final_amount) / event.amount)*-1 | percent:'1.1-2'}}</p>
+    <div id="whitespace">
+        <div id="container">
+            <div id="main-inner">
+                <div id="menu">
+                </div>
+                <div id="month">
+                    <input type="month" [(ngModel)]="date" (change)="getMonthEvents(); getWallet()" min="{{mindate}}" max="{{maxdate}}" required>
+                </div>
+                <div id="header">
+                    <div class="columnNum"><p>No.</p></div>
+                    <div class="columnInfo">
+                        <div ><p>Nombre</p></div>
+                        <div ><p>Monto inicial</p></div>
+                        <div><p >Fecha inicial</p></div>
+                        <div ><p>Monto final</p></div>
+                        <div><p >Fecha final</p></div>
+                        <div><p>Ganancia</p></div>
+                        <div ><p>%</p></div>
+                        <div></div>
                     </div>
-                    <div (click)="openModal(true); getClickedEvent(event)">
-                        <i class="bi bi-info-circle" ></i>
+                </div>
+                <div id="table">
+                    <div class="columnInfo">
+                        <div *ngFor = "let event of eventsList; let i = index" class="rowInfo">
+                            <div><p>{{i + 1}}</p></div>
+                            <div><p>{{event.title}}</p></div>
+                            <div><p>{{event.amount | currency}}</p></div>
+                            <div><p>{{event.date | date:'shortDate'}}</p></div>
+                            <div><p>{{event.invesment.final_amount | currency}}</p></div>
+                            <div><p>{{event.invesment.final_date  | date:'shortDate'}}</p></div>
+                            <div><p>{{event.amount + event.invesment.final_amount | currency}}</p></div>
+                            <div>
+                                <p>{{ ((event.amount + event.invesment.final_amount) / event.amount)*-1 | percent:'1.1-2'}}</p>
+                            </div>
+                            <div (click)="openModal(true); getClickedEvent(event)">
+                                <i class="bi bi-info-circle" ></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-    </div>
-    <div id="buttons">
-        <button (click)="openModal(false)">Nuevo pago</button>
+            <div [hidden] = "ishide" id="sidenav">
+                <div id="menu">
+                    <i (click)="hideNav()" class="bi bi-x-circle-fill"></i>
+                </div>
+                <mat-accordion class="example-headers-align" id="accordion">
+                    <mat-expansion-panel class="accordion-inner yellow">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="accordion-title">
+                                <i class="bi bi-info-circle-fill"></i>
+                                Información
+                            </mat-panel-title>
+                        </mat-expansion-panel-header> 
+                        <p>Nombre: {{currentwallet.name}}</p>
+                        <p>Monto inicial: {{currentwallet.initial_amount | currency}}</p> 
+                        <p>Monto final: {{currentwallet.total_amount | currency}}</p>
+                        <p>Fecha de creación: {{currentwallet.createdAt | date:'shortDate'}}</p>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel class="accordion-inner red" >
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="accordion-title">
+                                <i class="bi bi-emoji-smile-fill"></i>
+                                Estatus
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <img src='{{url}}' alt="">                
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel class="accordion-inner green" >
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="accordion-title">
+                                <i class="bi bi-gear-fill"></i>
+                                Ajustes
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>                
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>         
+        <div id="buttons">
+            <button (click)="openModal(false)">
+                <i class="bi bi-plus-circle-fill"></i>
+               <p>Nuevo Pago</p>
+            </button>
+        </div>
     </div>
 </div>
 

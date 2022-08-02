@@ -1,75 +1,115 @@
 <div id="maindiv">
     <div id="whitespace">
-        <div id="main-inner">
-            <div id="menu">
-                <i class="bi bi-three-dots"></i>
-            </div>
-            <div id="month">
-                <input type="month" [(ngModel)]="date" (change)="getMonthEvents(); getWallet()" min="{{mindate}}" max="{{maxdate}}" >
-            </div>
-            <div id="initialInfo">
-                <p>Monto Inical</p>
-                <p>{{initialamount | currency}}</p>
-            </div>
-            <div id="header">
-                <div class="columnNum"><p>No.</p></div>
-                <div class="columnInfo">
-                    <div ><p>Gasto</p></div>
-                    <div ><p>Monto</p></div>
-                    <div ><p >Fecha</p></div>
+        <div id="container">
+            <div id="main-inner">
+                <div id="menu">
+                    <i (click)="hideNav()" class="bi bi-three-dots"></i>
                 </div>
-                <div class="columnNum"><p>No.</p></div>
-                <div class="columnInfo">
-                    <div ><p>Ingreso</p></div>
-                    <div ><p>Monto</p></div>
-                    <div ><p>Fecha</p></div>
+                <div id="month">
+                    <input type="month" [(ngModel)]="date" (change)="getMonthEvents(); getWallet()" min="{{mindate}}" max="{{maxdate}}" required>
                 </div>
-            </div>
-            <div id="table">
-                <div class="columnInfo">
-                    <div *ngFor = "let expenses of expensesList; let i = index" class="rowInfo">
-                        <div><p>{{i + 1}}</p></div>
-                        <div><p>{{expenses.title}}</p></div>
-                        <div><p>{{expenses.amount | currency}}</p></div>
-                        <div><p>{{expenses.date  | date:'shortDate'}}</p></div>
+                <div id="initialInfo">
+                    <p>Monto Inical</p>
+                    <p>{{initialamount | currency}}</p>
+                </div>
+                <div id="header">
+                    <div class="columnNum"><p>No.</p></div>
+                    <div class="columnInfo">
+                        <div ><p>Gasto</p></div>
+                        <div ><p>Monto</p></div>
+                        <div ><p >Fecha</p></div>
+                    </div>
+                    <div class="columnNum"><p>No.</p></div>
+                    <div class="columnInfo">
+                        <div ><p>Ingreso</p></div>
+                        <div ><p>Monto</p></div>
+                        <div ><p>Fecha</p></div>
                     </div>
                 </div>
-                <div class="columnInfo">
-                    <div *ngFor = "let income of incomesList; let i = index">
-                        <div class="rowInfo">
+                <div id="table">
+                    <div class="columnInfo">
+                        <div *ngFor = "let expenses of expensesList; let i = index" class="rowInfo">
                             <div><p>{{i + 1}}</p></div>
-                            <div><p>{{income.title}}</p></div>
-                            <div><p>{{income.amount | currency}}</p></div>
-                            <div><p>{{income.date  | date:'shortDate'}}</p></div>
+                            <div><p>{{expenses.title}}</p></div>
+                            <div><p>{{expenses.amount | currency}}</p></div>
+                            <div><p>{{expenses.date  | date:'shortDate'}}</p></div>
+                        </div>
+                    </div>
+                    <div class="columnInfo">
+                        <div *ngFor = "let income of incomesList; let i = index">
+                            <div class="rowInfo">
+                                <div><p>{{i + 1}}</p></div>
+                                <div><p>{{income.title}}</p></div>
+                                <div><p>{{income.amount | currency}}</p></div>
+                                <div><p>{{income.date  | date:'shortDate'}}</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="footer">
+                    <div id="subtotal">
+                        <div class="columnNum"></div>
+                        <div class="columnInfo">
+                            <p>Total de gastos</p>
+                            <p>{{totalexpenses |  currency}}</p>
+                            <p></p>
+                        </div>
+                        <div class="columnNum" ></div>
+                        <div class="columnInfo">
+                            <p>Total de ingresos</p>
+                            <p>{{totalincomes |  currency}}</p>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div id="total">
+                        <div class="columnNum"></div>
+                        <div class="columnInfo">
+                            <p>Total disponible</p>
+                            <p>{{totalavailable | currency}}</p>
+                            <p></p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="footer">
-                <div id="subtotal">
-                    <div class="columnNum"></div>
-                    <div class="columnInfo">
-                        <p>Total de gastos</p>
-                        <p>{{totalexpenses |  currency}}</p>
-                        <p></p>
-                    </div>
-                    <div class="columnNum" ></div>
-                    <div class="columnInfo">
-                        <p>Total de ingresos</p>
-                        <p>{{totalincomes |  currency}}</p>
-                        <p></p>
-                    </div>
+            <div [hidden] = "ishide" id="sidenav">
+                <div id="menu">
+                    <i (click)="hideNav()" class="bi bi-x-circle-fill"></i>
                 </div>
-                <div id="total">
-                    <div class="columnNum"></div>
-                    <div class="columnInfo">
-                        <p>Total disponible</p>
-                        <p>{{totalavailable | currency}}</p>
-                        <p></p>
-                    </div>
-                </div>
+                <mat-accordion class="example-headers-align" id="accordion">
+                    <mat-expansion-panel class="accordion-inner yellow">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="accordion-title">
+                                <i class="bi bi-info-circle-fill"></i>
+                                Información
+                            </mat-panel-title>
+                        </mat-expansion-panel-header> 
+                        <p>Nombre: {{currentwallet.name}}</p>
+                        <p>Monto inicial: {{currentwallet.initial_amount | currency}}</p> 
+                        <p>Monto final: {{currentwallet.total_amount | currency}}</p>
+                        <p>Fecha de creación: {{currentwallet.createdAt | date:'shortDate'}}</p>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel class="accordion-inner red" >
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="accordion-title">
+                                <i class="bi bi-emoji-smile-fill"></i>
+                                Estatus
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <img src='{{url}}' alt="">                
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel class="accordion-inner green" >
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="accordion-title">
+                                <i class="bi bi-gear-fill"></i>
+                                Ajustes
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>                
+                    </mat-expansion-panel>
+                </mat-accordion>
             </div>
-        </div>
+        </div>         
         <div id="buttons">
             <button (click)="openModal('E')">
                 <i class="bi bi-plus-circle-fill"></i>

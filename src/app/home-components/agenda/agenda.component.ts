@@ -47,7 +47,7 @@ export class AgendaComponent implements OnInit {
     },
 
     editable: true,
-    eventColor: '#378006',
+    eventColor: '#F26BAA',
 
     locales: [ esLocale],
     locale: 'es', 

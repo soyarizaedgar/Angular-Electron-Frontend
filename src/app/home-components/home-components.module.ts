@@ -9,6 +9,7 @@ import { EventModalComponent } from './event-modal/modal.component';
 import { WalletModalComponent } from './wallet-modal/wallet-modal.component';
 
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion'
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { CalendarComponent } from './calendar/calendar.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -56,7 +57,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FormsModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    FullCalendarModule
+    FullCalendarModule,
+    MatExpansionModule
   ],
   exports:[
     NavigationComponent,
