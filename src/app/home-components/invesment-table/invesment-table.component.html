@@ -17,25 +17,24 @@
                         <div><p >Fecha final</p></div>
                         <div><p>Ganancia</p></div>
                         <div ><p>%</p></div>
-                        <div></div>
                     </div>
                 </div>
                 <div id="table">
                     <div class="columnInfo">
-                        <div *ngFor = "let event of eventsList; let i = index" class="rowInfo">
+                        <div *ngFor = "let event of eventsList; let i = index" class="rowInfo" (click)="openModal(true); getClickedEvent(event)">
                             <div><p>{{i + 1}}</p></div>
                             <div><p>{{event.title}}</p></div>
                             <div><p>{{event.amount | currency}}</p></div>
-                            <div><p>{{event.date | date:'shortDate'}}</p></div>
+                            <div><p>{{event.date | date:'shortDate':'GMT'}}</p></div>
                             <div><p>{{event.invesment.final_amount | currency}}</p></div>
-                            <div><p>{{event.invesment.final_date  | date:'shortDate'}}</p></div>
+                            <div><p>{{event.invesment.final_date  | date:'shortDate':'GMT'}}</p></div>
                             <div><p>{{event.amount + event.invesment.final_amount | currency}}</p></div>
                             <div>
                                 <p>{{ ((event.amount + event.invesment.final_amount) / event.amount)*-1 | percent:'1.1-2'}}</p>
                             </div>
-                            <div (click)="openModal(true); getClickedEvent(event)">
+                            <!-- <div (click)="openModal(true); getClickedEvent(event)">
                                 <i class="bi bi-info-circle" ></i>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -82,7 +81,11 @@
         <div id="buttons">
             <button (click)="openModal(false)">
                 <i class="bi bi-plus-circle-fill"></i>
-               <p>Nuevo Pago</p>
+               <p>Nueva Inversion</p>
+            </button>
+            <button (click)="openWalletModal()">
+                <i class="bi bi-pencil-square"></i>
+                <p>Editar Billetera</p>
             </button>
         </div>
     </div>

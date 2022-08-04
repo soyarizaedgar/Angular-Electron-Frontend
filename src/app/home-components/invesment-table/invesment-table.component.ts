@@ -4,6 +4,7 @@ import { WalletsService } from 'src/app/services/wallets.service';
 import { EventModalComponent } from '../event-modal/modal.component';
 import {MatDialog} from '@angular/material/dialog';
 import { ObservableService } from 'src/app/services/observable.service';
+import { WalletModalComponent } from '../wallet-modal/wallet-modal.component';
 
 
 @Component({
@@ -87,6 +88,11 @@ export class InvesmentTableComponent implements OnInit, OnDestroy {
   openModal(isEdit:boolean){
     this.modal.open(EventModalComponent)
     this.observable.isInvest$.emit(true)
+  }
+
+  openWalletModal(){
+    this.modal.open(WalletModalComponent);
+    this.observable.wallet$.emit(this.currentwallet)
   }
   
 }

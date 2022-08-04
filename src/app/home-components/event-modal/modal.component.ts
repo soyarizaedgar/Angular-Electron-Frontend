@@ -198,7 +198,7 @@ export class EventModalComponent implements OnInit, OnDestroy {
       rrule,
       invesment
     }
-    
+
     if (this.isEdit == true) {
       this.updateEvent(object, this.eventId)
     } else {
@@ -238,10 +238,17 @@ export class EventModalComponent implements OnInit, OnDestroy {
       until: end,
     }
 
+    const invesment = {
+      status: false,
+      final_date: null,
+      final_amount: null
+    }
+
     const object:object = {
       rrule,
       ... task,
       user_id: this.userId,
+      invesment
     }
 
     if (this.isEdit == true) {
@@ -311,7 +318,7 @@ export class EventModalComponent implements OnInit, OnDestroy {
     
     let f_date =  this.clickedEvent.invesment.final_date
     if (f_date != null) {
-      f_date = this.formatDate(new Date(f_date))
+      f_date = this.formatDate(this.utc2iso(f_date.concat('T00:00:00Z')))
     }
     let income_
     if(this.clickedEvent.amount > 0){
@@ -323,14 +330,14 @@ export class EventModalComponent implements OnInit, OnDestroy {
     if (this.isPayment == true) {
       this.paymentForm.patchValue({
         'title': this.clickedEvent.title,
-        'date':  this.formatDate(new Date(this.clickedEvent.date)),
+        'date':  this.formatDate(this.utc2iso(this.clickedEvent.date)),
         'amount': Math.abs(this.clickedEvent.amount),
         'wallet_id': this.clickedEvent.wallet_id,
         'final_amount': this.clickedEvent.invesment.final_amount,
         'final_date':  f_date,
         'income': income_
       })
-      
+
       let freq = false, end = 'never', until
 
       if (
@@ -375,6 +382,14 @@ export class EventModalComponent implements OnInit, OnDestroy {
     
   }
 
+  utc2iso(date:string){
+    const offset =   Math.floor(new Date(date).getTimezoneOffset()/60)
+    const offsetstr = offset.toString().padStart(2, '0').concat(':00')
+    const utc = date.slice(0, -1) + '-' + offsetstr
+    const iso = new Date(utc)
+    return iso
+  }
+
   // **************************************************************************
 
   deleteEvent(){
@@ -389,6 +404,5 @@ export class EventModalComponent implements OnInit, OnDestroy {
 
   }
 
-
-  
 }
+

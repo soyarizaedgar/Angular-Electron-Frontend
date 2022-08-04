@@ -28,21 +28,19 @@
                 </div>
                 <div id="table">
                     <div class="columnInfo">
-                        <div *ngFor = "let expenses of expensesList; let i = index" class="rowInfo">
+                        <div *ngFor = "let expenses of expensesList; let i = index" class="rowInfo" (click)="clickEvent(expenses)">
                             <div><p>{{i + 1}}</p></div>
                             <div><p>{{expenses.title}}</p></div>
                             <div><p>{{expenses.amount | currency}}</p></div>
-                            <div><p>{{expenses.date  | date:'shortDate'}}</p></div>
+                            <div><p>{{expenses.date  | date:'shortDate':'GMT'}}</p></div>
                         </div>
                     </div>
                     <div class="columnInfo">
-                        <div *ngFor = "let income of incomesList; let i = index">
-                            <div class="rowInfo">
-                                <div><p>{{i + 1}}</p></div>
-                                <div><p>{{income.title}}</p></div>
-                                <div><p>{{income.amount | currency}}</p></div>
-                                <div><p>{{income.date  | date:'shortDate'}}</p></div>
-                            </div>
+                        <div *ngFor = "let income of incomesList; let i = index" class="rowInfo" (click)="clickEvent(income)">
+                            <div><p>{{i + 1}}</p></div>
+                            <div><p>{{income.title}}</p></div>
+                            <div><p>{{income.amount | currency}}</p></div>
+                            <div><p>{{income.date  | date:'shortDate':'GMT'}}</p></div>
                         </div>
                     </div>
                 </div>

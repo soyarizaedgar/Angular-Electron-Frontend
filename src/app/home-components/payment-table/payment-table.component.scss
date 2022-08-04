@@ -171,6 +171,11 @@ $border-style: 2px solid #F26BAA;
                             align-items: center;
                             height: 10%;
                             text-align: center;
+                            cursor: pointer;
+                            &:hover{
+                                color: #F26BAA;
+                                opacity: 50%;
+                            }
                             
                             div{
                                 width: 30%;

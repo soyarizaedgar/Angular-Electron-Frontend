@@ -2,7 +2,7 @@
 
     <div id="editbtns">
         <button (click)="updateValues()" *ngIf = "isEdit" >Editar</button>
-        <button (click)="deleteEvent()" *ngIf = "isEdit">Eliminar</button>
+        <button (click)="deleteEvent()" *ngIf = "isEdit" mat-dialog-close>Eliminar</button>
     </div>
 
     <div class="menu" *ngIf = "!isEdit && !isInvest">

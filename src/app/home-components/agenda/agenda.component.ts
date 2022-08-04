@@ -78,6 +78,7 @@ export class AgendaComponent implements OnInit {
       allDay,
       rrule
     }
+    console.log(object.date)
     this.modal.open(EventModalComponent);
     this.observable.event$.emit(object)
   }

@@ -2,7 +2,7 @@
 
     <div id="editbtns">
         <button (click)="updateValues()" *ngIf = "isEdit">Editar</button>
-        <button (click)="deleteAllEvents()" *ngIf = "isEdit">Eliminar</button>
+        <button (click)="deleteAllEvents()" *ngIf = "isEdit" mat-dialog-close>Eliminar</button>
     </div>
 
     <div id="menu" *ngIf = "!isEdit">
@@ -15,11 +15,13 @@
             <input type="number" id="initial_amount" formControlName = "initial_amount" class="form-control" placeholder="$0.00">
             <div id="billsorinvest">
                 <div class="billsorinvest_inner">
-                    <input type="radio"  formControlName = "type" value="B" class="form-control">
+                    <input type="radio"  formControlName = "type" value="B" class="form-control"
+                    (click)="toogleType('B')">
                     <p>Gastos e ingresos</p>
                 </div>
                 <div class="billsorinvest_inner">
-                    <input type="radio"  formControlName = "type" value="I" class="form-control" >
+                    <input type="radio"  formControlName = "type" value="I" class="form-control" 
+                    (click)="toogleType('I')" >
                     <p>Inversiones</p>
                 </div>
             </div>

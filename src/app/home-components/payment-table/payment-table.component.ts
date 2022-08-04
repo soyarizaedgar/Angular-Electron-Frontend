@@ -39,20 +39,6 @@ export class PaymentTableComponent implements OnInit, OnDestroy  {
     
   }
   
-  hideNav(){
-    this.ishide = !this.ishide
-    return this.ishide
-  }
-
-  checkStatus(initial:number, final:number){
-    if (initial > final) {
-      this.url = '../../../assets/stonks-meme.jpg'
-    }
-    else{
-      this.url = '../../../assets/malcom-meme.png'
-    }
-  }
-
   ngOnDestroy(): void {
     this.subscription.unsubscribe()
   }
@@ -109,6 +95,20 @@ export class PaymentTableComponent implements OnInit, OnDestroy  {
       console.log(err)
     }});
   }
+
+  hideNav(){
+    this.ishide = !this.ishide
+    return this.ishide
+  }
+
+  checkStatus(initial:number, final:number){
+    if (initial > final) {
+      this.url = '../../../assets/stonks-meme.jpg'
+    }
+    else{
+      this.url = '../../../assets/malcom-meme.png'
+    }
+  }
   
   formatDate(utcdate:Date){
     const year = utcdate.getFullYear().toString()
@@ -137,6 +137,11 @@ export class PaymentTableComponent implements OnInit, OnDestroy  {
         this.modal.open(EventModalComponent);
         break;
     }
+  }
+
+  clickEvent(event:object){
+    this.modal.open(EventModalComponent);
+    this.observable.event$.emit(event)
   }
   
 }

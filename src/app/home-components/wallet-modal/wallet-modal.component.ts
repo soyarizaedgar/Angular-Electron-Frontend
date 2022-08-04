@@ -37,15 +37,26 @@ export class WalletModalComponent implements OnInit, OnDestroy{
     });
   }
 
+  toogleType(type:string){
+    const init = this.walletForm.get('initial_amount')
+    if (type == 'I') {
+      init?.disable()
+      init?.reset()
+    }
+    else{
+      init?.enable()
+    }
+  }
+
   click_sub(){
 
     const wallet = this.walletForm.value
     const object = {
       ... wallet,
       user_id: this.userId,
-      total_amount: this.walletForm.value.initial_amount
+      total_amount: this.walletForm.value.initial_amount || null
     }
-
+    console.log(object)
     if (this.isEdit == true) {
       this.wallets.updateWallet(object, this.clickedWallet._id).subscribe(response =>{
         console.log(response)
@@ -79,8 +90,11 @@ export class WalletModalComponent implements OnInit, OnDestroy{
       'type': this.clickedWallet.type
     })
     const type = this.walletForm.get('type')
+    const init = this.walletForm.get('initial_amount')
     type?.disable()
-    
+    if (!this.walletForm.value.initial_amount) {
+      init?.disable() 
+    }
   }
 
   ngOnDestroy(){
