@@ -28,10 +28,11 @@
                 class="form-control" placeholder="Example@email.com">
                 <input type="password" id="password" formControlName = "password" 
                 class="form-control" placeholder="Password">
-                <!-- <input type="checkbox" id="rememberMe" formControlName = "rememberMe" class="form-control"> 
-                <label for="rememberMe">mantener sesión iniciada</label>  -->
                 <button (click)="click_sign()" [disabled]="signinForm.invalid" type="button" class="submit-btn" routerLink="/home">INICIAR SESIÓN</button>
             </form>
         </div>
+        <!-- <div id="links">
+            <p (click)="forgotPwd()">¿Olvidaste tu contraseña?</p>
+        </div> -->
     </div>
 </div>

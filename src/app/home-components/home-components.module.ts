@@ -27,8 +27,6 @@ import { PaymentTableComponent } from './payment-table/payment-table.component';
 import { InvesmentTableComponent } from './invesment-table/invesment-table.component';
 import { ConfigUserComponent } from './config-user/config-user.component';
 
-
-
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin,

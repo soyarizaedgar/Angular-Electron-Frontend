@@ -103,10 +103,10 @@ export class PaymentTableComponent implements OnInit, OnDestroy  {
 
   checkStatus(initial:number, final:number){
     if (initial > final) {
-      this.url = '../../../assets/stonks-meme.jpg'
+      this.url = 'assets/stonks-meme.jpg'
     }
     else{
-      this.url = '../../../assets/malcom-meme.png'
+      this.url = 'assets/malcom-meme.png'
     }
   }
   

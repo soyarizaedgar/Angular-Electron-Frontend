@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { UsersService } from "../../services/users.service";
-import { from, Subscription } from 'rxjs';
+import {MatDialog} from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ForgotpwdModalComponent } from '../forgotpwd-modal/forgotpwd-modal.component';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private users: UsersService, private router: Router) { }
+  constructor(private users: UsersService, private router: Router, public modal: MatDialog) { }
 
   registerForm!: FormGroup;
   signinForm!: FormGroup;
@@ -65,5 +66,9 @@ export class RegisterComponent implements OnInit {
     }else{
       this.router.navigateByUrl('/signin')
     }
+  }
+
+  forgotPwd(){
+    this.modal.open(ForgotpwdModalComponent)
   }
 }

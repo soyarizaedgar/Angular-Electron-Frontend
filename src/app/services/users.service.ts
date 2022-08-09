@@ -76,5 +76,21 @@ export class UsersService {
           this._refresh$.next();
         }))
   }
-  
+
+  forgotpassword(email:string){
+    return this.http.post<Object>('http://localhost:3001/forgot-password', email)
+    .pipe(
+      tap(()=>{
+        this._refresh$.next();
+      })
+    )
+  }
+
+  resetpasssword(object: object, userId:string){
+    return this.http.put('http://localhost:3001/reset-password/' + userId, object)
+      .pipe(
+        tap(()=>{
+          this._refresh$.next();
+        }))
+  }
 }

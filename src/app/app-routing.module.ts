@@ -9,6 +9,7 @@ import { MainComponent } from './home-components/main/main.component';
 import { PaymentTableComponent } from './home-components/payment-table/payment-table.component';
 import { HomeComponent } from './maincomponents/home/home.component';
 import { RegisterComponent } from './maincomponents/register/register.component';
+import { ResetPasswordComponent } from './maincomponents/reset-password/reset-password.component';
 import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
       {path: 'wallets',canActivate:[AuthGuard], component:PaymentTableComponent, pathMatch: 'full'},
       {path: 'invesments',canActivate:[AuthGuard], component:InvesmentTableComponent, pathMatch: 'full'},
       {path: 'userconfig',canActivate:[AuthGuard], component:ConfigUserComponent, pathMatch: 'full'}
-    ]}
+    ]},
+    {path: 'reset-password', component: ResetPasswordComponent, pathMatch: 'full'},
 ];
 
 @NgModule({

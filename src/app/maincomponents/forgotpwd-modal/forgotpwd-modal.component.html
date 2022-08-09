@@ -1,0 +1,12 @@
+<div id="main_div" >
+    <div id="text">
+        Se enviará un enlace para restablecer su contraseña a la dirección de correo electrónico asociada con su ID de inicio de sesión.
+    </div>
+    <div>
+        <form [formGroup] = "forgotForm" class="forms_box">
+            <input type="email" id="email" formControlName = "email" class="form-control" placeholder="Example@email.com">
+            <button  (click)="click_sub()" type="button" class="submit-btn" [disabled]="forgotForm.invalid"
+            >ENVIAR</button>
+        </form>
+    </div>
+</div>

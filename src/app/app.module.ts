@@ -15,12 +15,16 @@ import { InterceptorService } from './services/interceptor.service';
 import { HomeComponentsModule } from './home-components/home-components.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
+import { ResetPasswordComponent } from './maincomponents/reset-password/reset-password.component';
+import { ForgotpwdModalComponent } from './maincomponents/forgotpwd-modal/forgotpwd-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    ResetPasswordComponent,
+    ForgotpwdModalComponent,
   ],
   imports: [
     BrowserModule,

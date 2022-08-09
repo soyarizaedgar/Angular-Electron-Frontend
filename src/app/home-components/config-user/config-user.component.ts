@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/services/users.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-config-user',
@@ -19,7 +20,7 @@ export class ConfigUserComponent implements OnInit {
   subscription!: Subscription;
   option = 1
 
-  constructor(private users:UsersService, public router: Router) { }
+  constructor(private users:UsersService, public router: Router,  private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -39,6 +40,10 @@ export class ConfigUserComponent implements OnInit {
       this.getUser();
     })
     this.userForm.disable()
+  }
+
+  openSnack(message:string){
+    this.snackBar.open(message);
   }
 
   updateUser(){
@@ -61,9 +66,8 @@ export class ConfigUserComponent implements OnInit {
       this.users.updatepwd(this.userId, object).subscribe(res =>{
         console.log(res)
       })
-      // this.enableForm('P')
     }else{
-      window.alert("passwords don't match");
+      this.openSnack("passwords don't match")
     }
     this.passwordForm.reset()
   }

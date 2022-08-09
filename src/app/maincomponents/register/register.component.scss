@@ -44,6 +44,13 @@
             }
         }
 
+        #links{
+            text-align: center;
+            color: #2155BF;
+            cursor: pointer;
+            margin: 2rem;
+        }
+
         .forms_box{
             display: flex;
             flex-direction: column;

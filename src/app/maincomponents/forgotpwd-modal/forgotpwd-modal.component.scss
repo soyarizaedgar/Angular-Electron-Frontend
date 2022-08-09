@@ -1,0 +1,76 @@
+#main_div{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    #text{
+        width: 20rem;
+        text-align: center;
+        margin: 1rem 0;
+    }
+
+    .forms_box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        input{
+            margin: 1rem;
+            width: 80%;
+            border: 0;
+            background-color: #EEEEEE;
+            padding: 0.5rem;
+        }
+
+        .form-control.ng-touched.ng-invalid {
+            border: 2px solid #fc1d1d;
+        }
+        .form-control.ng-touched.ng-valid {
+            border: 2px solid rgb(30, 201, 30);
+        }
+
+        #billsorinvest{
+            display: flex;
+            width: 10rem;
+            padding: 0.5rem 1rem;
+            flex-direction: column;
+            
+            .billsorinvest_inner{
+                display: flex;
+                width: inherit;
+                flex-direction: row;
+                align-items: center;
+                input{
+                    width: 10%;
+                    margin: 0.5rem;
+                }
+                p{
+                    margin: 0.5rem ;
+                }
+            }
+            
+        }
+
+        .submit-btn:disabled, .submit-btn:enabled {
+            background: #FF3A7E;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin: 1rem 0 0 0;
+            width: 10rem;              
+            cursor: pointer;
+            justify-self: center;
+        }
+    
+        .submit-btn:disabled{
+            opacity: 0.5;
+        }
+        
+    }
+}
