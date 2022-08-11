@@ -13,7 +13,8 @@ createWindow = () => {
         resizable: false,
         webPreferences: {
             nodeIntegration: true
-        }
+        },
+        icon: __dirname + '/assets/Ecommerce_686-removebg-preview.png'
     });
     appWin.maximize();
     appWin.loadURL(`file://${__dirname}/dist/index.html`);
