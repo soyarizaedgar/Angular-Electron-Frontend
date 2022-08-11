@@ -12,7 +12,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 })
 export class UsersService {
 
-
+  Apiurl = 'https://biyuyoapi.herokuapp.com/'
   // check if token is expired
   helper = new JwtHelperService();
 
@@ -25,7 +25,7 @@ export class UsersService {
   }
 
   signup(user:Object){
-    return this.http.post<Object>('http://localhost:3001/user', user)
+    return this.http.post<Object>( this.Apiurl + 'user', user)
       .pipe(
         tap(()=>{
           this._refresh$.next();
@@ -34,7 +34,7 @@ export class UsersService {
   }
 
   signin(data:Object){
-    return this.http.post<Object>('http://localhost:3001/signin', data)
+    return this.http.post<Object>( this.Apiurl + 'signin', data)
       .pipe(
         map((data:any)=>{
         localStorage.setItem('access-token', data.token)
@@ -55,14 +55,14 @@ export class UsersService {
   }
 
   getUser(userId:string){
-    return this.http.get('http://localhost:3001/user/' + userId ).pipe(
+    return this.http.get( this.Apiurl + 'user/' + userId ).pipe(
       map((response:any) =>{
         return response;
     }));
   }
 
   updateUser(userId:string, Object:object){
-    return this.http.put('http://localhost:3001/user/' + userId, Object)
+    return this.http.put( this.Apiurl + 'user/' + userId, Object)
       .pipe(
         tap(()=>{
           this._refresh$.next();
@@ -70,7 +70,7 @@ export class UsersService {
   }
 
   updatepwd(userId:string, Object:object){
-    return this.http.put('http://localhost:3001/userpwd/' + userId, Object)
+    return this.http.put( this.Apiurl + 'userpwd/' + userId, Object)
       .pipe(
         tap(()=>{
           this._refresh$.next();
@@ -78,7 +78,7 @@ export class UsersService {
   }
 
   forgotpassword(email:string){
-    return this.http.post<Object>('http://localhost:3001/forgot-password', email)
+    return this.http.post<Object>( this.Apiurl + 'forgot-password', email)
     .pipe(
       tap(()=>{
         this._refresh$.next();
@@ -87,7 +87,7 @@ export class UsersService {
   }
 
   resetpasssword(object: object, userId:string){
-    return this.http.put('http://localhost:3001/reset-password/' + userId, object)
+    return this.http.put( this.Apiurl + 'reset-password/' + userId, object)
       .pipe(
         tap(()=>{
           this._refresh$.next();

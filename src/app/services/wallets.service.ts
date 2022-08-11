@@ -10,7 +10,7 @@ import { map, tap } from "rxjs/operators";
 })
 export class WalletsService {
 
-
+  Apiurl = 'https://biyuyoapi.herokuapp.com/'
   constructor(private http: HttpClient, private router: Router) { }
 
   private _refresh$ = new Subject<void>();
@@ -22,21 +22,21 @@ export class WalletsService {
 
   
   getAllWallets(userId:string){
-    return this.http.get('http://localhost:3001/wallets/' + userId ).pipe(
+    return this.http.get(this.Apiurl + 'wallets/' + userId ).pipe(
       map((response:any) =>{
         return response;
     }));
   }
 
   getOneWallet(walletId:string){
-    return this.http.get('http://localhost:3001/wallet/' + walletId ).pipe(
+    return this.http.get(this.Apiurl + 'wallet/' + walletId ).pipe(
       map((response:any) =>{
         return response;
     }));
   }
 
   createWallet(wallet:Object){
-    return this.http.post('http://localhost:3001/wallet', wallet)
+    return this.http.post(this.Apiurl + 'wallet', wallet)
       .pipe(
         tap(()=>{
           this._refresh$.next();
@@ -44,7 +44,7 @@ export class WalletsService {
   }
 
   updateWallet(event:Object, walletId:string){
-    return this.http.put('http://localhost:3001/wallet/' + walletId, event)
+    return this.http.put(this.Apiurl + 'wallet/' + walletId, event)
       .pipe(
         tap(()=>{
           this._refresh$.next();
@@ -52,7 +52,7 @@ export class WalletsService {
   }
 
   deleteWallet(walletId:string){
-    return this.http.delete('http://localhost:3001/wallet/' + walletId)
+    return this.http.delete(this.Apiurl + 'wallet/' + walletId)
       .pipe(
         tap(()=>{
           this._refresh$.next();
@@ -62,21 +62,21 @@ export class WalletsService {
   // Events
 
   getAllEvents(userId:string){
-    return this.http.get('http://localhost:3001/events/' + userId ).pipe(
+    return this.http.get(this.Apiurl + 'events/' + userId ).pipe(
       map((response:any) =>{
         return response;
     }));
   }
 
   getTotalAmount(walletId:string){
-    return this.http.get('http://localhost:3001/events_t/' + walletId ).pipe(
+    return this.http.get(this.Apiurl + 'events_t/' + walletId ).pipe(
       map((response:any) =>{
         return response;
     }));
   }
 
   getMonthEvents(walletId:string, month:Object){
-    return this.http.post('http://localhost:3001/events_m/' + walletId, month)
+    return this.http.post(this.Apiurl + 'events_m/' + walletId, month)
       .pipe(
         map((response:any) =>{
           return response;
@@ -84,7 +84,7 @@ export class WalletsService {
   }
 
   getInitialAmount(walletId:string, month:object){
-    return this.http.post('http://localhost:3001/events_i/' + walletId, month)
+    return this.http.post(this.Apiurl + 'events_i/' + walletId, month)
       .pipe(
         map((response:any) =>{
           return response;
@@ -92,7 +92,7 @@ export class WalletsService {
   }
 
   createEvent(event:Object){
-    return this.http.post('http://localhost:3001/event', event)
+    return this.http.post(this.Apiurl + 'event', event)
       .pipe(
         tap(()=>{
           this._refresh$.next();
@@ -100,7 +100,7 @@ export class WalletsService {
   }
 
   updateEvent(event:Object, eventId:string){
-    return this.http.put('http://localhost:3001/event/' + eventId, event)
+    return this.http.put(this.Apiurl + 'event/' + eventId, event)
       .pipe(
         tap(()=>{
           this._refresh$.next();
@@ -108,7 +108,7 @@ export class WalletsService {
   }
 
   deleteEvent(eventId:string){
-    return this.http.delete('http://localhost:3001/event/' + eventId)
+    return this.http.delete(this.Apiurl + 'event/' + eventId)
       .pipe(
         tap(()=>{
           this._refresh$.next();
@@ -116,7 +116,7 @@ export class WalletsService {
   }
 
   deleteManyEvents(walletId:string){
-    return this.http.delete('http://localhost:3001/events/' + walletId)
+    return this.http.delete(this.Apiurl + 'events/' + walletId)
       .pipe(
         tap(()=>{
           this._refresh$.next();
